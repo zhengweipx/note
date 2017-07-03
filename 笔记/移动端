@@ -1,0 +1,573 @@
+移动端就这3件事
+touchstart    >   mousedown       移动端事件比鼠标事件快300ms
+touchmove     >   mousemove
+touchend      >   mouseup
+
+移动端问题：
+点透：如果一个具有点击事件的元素下面有一个具有点击特性的元素，当点击之后，在300ms之内如果上层元素消失，那么这个事件就会转移到下层元素的身上，这种现象叫点透。
+
+e.preventDefault();
+e.stopPropagation();
+
+事件对象
+touches 获取屏幕当前的触摸点信息数组
+targetTouches 在当前元素内部的触摸点信息
+changedTouches 自从上次触发事件以来，触发事件的触摸点数组（经常用这个）
+pageX;
+pageY;
+
+所有移动端事件尽量别用animate，经常用transition/transform
+
+
+时间对象date
+
+1970年1月1日0点0分0秒0毫秒 
+1970年之前为负，1970年以后为正。
+GMT（格林尼治时间）本初子午线经过这里
+UTC（世界协调时）原子钟计算时间   javaScript采用的UTC
+
+let time=new Date();本地时间
+let ago=new Date(2008,0,8,8,8,8,8);  0是1月
+let ago=new Date('09/08/2008 13:01:02');  以字符串形式传值是几月就是几月
+                  13:01:02  09/08/2008
+
+let arr=[2008,0,8,8,8,8,8];
+let ago=new Date(...arr)
+
+time.getFullYear();  获取年份
+time.getMonth();  (0~11)  月
+time.getDate();   日
+time.getHours()   时
+time.getMinutes()  分
+time.getSeconds()  秒
+time.getMilliseconds()  毫秒
+time.getDay()  星期（周日是0）
+time.getTime()  距离1970年的毫秒数
+time.getTimezoneOffset() 本地时间与标准时间的差
+
+
+设置时间
+get改为set，星期不能设置
+
+
+客户端存储方式：
+1.cookie   最大数据量是4K字节
+2.localStorage       5M~10M             只要你不清永远都存在
+3.sessionStorage     5M~10M
+他们的安全性都很低。
+
+cookie就是我们计算机里的一个文件，一个字符串，它的结构比较特殊，是一种键值对的结构（aa=bb），它是同域的，不能跨浏览器，不同的浏览器之间是不能相互访问cookie的
+有两种类型：一种是临时性的，一种是设置生存周期的cookie
+bit 位  byte 字节 1B=8b    K  1K=1024B  2^10    M  1M=1024K   G 1G=1024M  T 1T=1024G
+
+
+不管设置还是访问都用document.cookie
+设置
+document.cookie='aa=bb';
+它的生命周期仅存在浏览器打开到关闭（临时性）
+
+指定生存周期的cookie：
+let time=new Date();
+time.setTime(time.getTime()+30*1000);
+document.cookie='aa==bb;expires='+time.toGMTString(); 
+
+
+设置cookie
+function setCookie(attr,value,time){
+	if(time){
+		let nowtime=new Date();
+		nowtime.setTime(nowtime.getTime()+time*1000);
+		document.cookie=attr+'='+value+';expires='+time.toGMTString();
+	}else{
+		document.cookie=attr+'='+value;
+	}
+	
+}
+
+获取cookie
+function getCookie(attr){
+	let cookies=document.cookie;
+	let arr=cookies.split('; ');
+	for(let i=0;i<arr.length;i++){
+		if(arr[i].split('=')[0]==attr){
+			return arr[i].split('=')[1];
+		}
+	}
+	return false;
+}
+console.log(getCookie())
+
+删除cookie
+function delCookie(attr){
+	let time=new Date();
+	time.setTime(time.getTime()-1);
+	document.cookie=attr+'='+'dsda'+';expires='+time.toGMTString();
+}
+
+
+
+localStorage  只要你不清永远都存在   其实是window下的   
+
+localStorage.aa='bb';
+localStorage['bb']=123;
+localStorage.setItem('name','lisi');
+console.log(localStorage.getItem('name'))/console.log(localStorage.name)
+
+localStorage.removeItem('aa');
+localStorage.clear();   将所有全清空
+
+
+sessionStorage   当前绘画窗口关闭sessionStorage 就会被清除
+
+let str=JSON.stringify(obj)  将对象和数组转化为字符串
+
+JSON.parse(str)  将字符串转化为对象和数组
+
+
+
+canvas
+在行内设置宽高，其他设置会引起里面内容变形
+
+启动绘画功能，相当于首先需要一个画笔
+let paint=canvas.getContext('2d')    2d
+paint.beginPath();    开始绘画的路径
+paint.translate(200,200)       只会移坐标点
+paint.save();         会将在做底下之前的状态保存下来       paint.restore()  将保存下来的状态拿出来
+paint.fillStyle='red';  改变颜色
+paint.fillRect(50,50,200,100);(坐标x,坐标y,宽,高)     矩形，默认的填充颜色是黑色
+paint.closePath();    结束绘画的路径
+
+
+paint.strokeStyle='red';              轮廓颜色
+paint.lineWidth=10;                   轮廓宽度，最小不能等于0
+paint.shadowColor='';
+paint.shadowBlur=1;                   阴影扩散范围
+paint.shadowOffsetX=10;               X轴偏移距离
+paint.shadowOffsetY=10;
+paint.strokeRect(50,50,200,100);      不填充的矩形
+
+let linear=paint.createLinearGradient(200,200,400,300);  定义渐变的起始和末尾
+linear.addColorStop(0,'red');               渐变的颜色
+linear.addColorStop(0.5,'red');
+linear.addColorStop(1,'red');
+
+paint.clearRect(50,50,10,10)   (x,y,width,height)     清除
+let dian=paint.getImageData(0,0,100,100)     保存所有像素点信息
+paint.putImageData(dian,100,100)             复制,一个像素点有4个信息
+
+
+
+线
+paint.beginPath();
+paint.moveto();
+paint.lineto();
+paint.closePath();
+paint.stroke();
+
+圆
+paint.beginPath();
+paint.arc(100,100,50,0,Math.PI*2,true); (x,y,r,开始角度,结束角度（弧度）,true(逆时针))
+paint.closePath();     闭合效果，形成圆环
+let radial=paint.createRadialGradient(100,100,0,100,100,50)
+paint.stroke();
+
+
+
+圆内正多边形
+let x,y,r;
+let ran=360/n;
+x+Math.sin((i*ran+45)*Math.PI/180)*r;
+y+Math.cos((i*ran+45)*Math.PI/180)*r;
+
+
+弧
+
+paint.beginPath();
+paint.moveTo();
+paint.arcTo(100,100,150,100,50);(控制点，结束点，半径)
+
+2次贝斯尔曲线
+paint.quadraticCurveTo(200,250,400,100);(控制点，结束点)
+
+3次贝斯尔曲线
+paint.bezierCurveTo(100,200,400,100,100,50);(控制点，控制点，结束点)
+
+
+文本
+paint.font='20px 宋体';
+paint.textAlign='center';
+paint.fillStyle='red';
+paint.fillText('多撒大多',100,100)
+
+
+
+文件
+document.querySelector('input[type=file]').onchange=function(){
+	let file=this.files[0];
+	console.log(file);
+	let f=new FileReader();
+	f.readAsDataURL(file);
+	f.onload=function(){
+		let img=document.createElement('img');
+		img.src=this.result;
+		paint.drawImage(img,0,0,200,200);
+		arr.push(paint.getImageData(0,0,canvas.width,canvas.height));
+	}
+}
+
+将画布保存
+let data=canvas.toDataURL('image/png');
+location.href=data.replace('data:image/png','data:stream/octet')
+
+
+正则是一种用来匹配或者检测符合某种规范的字符串的语言。
+
+正则对象RegExp();
+
+两个方法：
+test
+exec
+
+创建方式：
+1、const reg=new RegExp('a','imgy');(正则表达式，模式修正符（i/m/g/y）) g是全局匹配，必须从字符串的开头到结尾
+2、const reg=/a/i;   两斜杠中间的内容是定界符
+
+i 代表不区分大小写； m 代表多行匹配； y 代表开头带^
+
+console.log(reg.flags)     输出模式修正符
+console.log(reg.source)    输出定界符
+
+let reg=/abcd/;
+let str='abcddds';
+console.log(reg.test(str))   检测有没abcd，有true
+
+console.log(reg.exec(str))    检测成功立即返回，有g会继续往后检测，会改变正则lastIndex属性
+检测成功有3个键，返回的是数组：0键代表匹配到的值，index键代表匹配到的字符开始的位置，input代表检测的字符串
+检测失败返回null
+
+
+reg.lastIndex 下次检测开始位置
+
+
+let reg=/sadasd23123/;  任何一个符号、字母和数字都是原子，原子是正则表达式最小的单位
+
+
+特殊的原子：
+\d 匹配0-9任意一个数字；                 \D   除了数字外任意一个字符
+\w 匹配数字、字母、下划线任意一个字符；  \W   除了。。。。。。
+\s 匹配任意一个空白字符（空格、换行）；  \S   除了。。。。。。
+. 匹配除了换行符之外的所有一个字符
+
+原子表
+let reg=/[56789]/; 范围是5-9，自带或，只能匹配一个
+let reg=/[^0-9]/; 除了0-9任意一个字符，^代表非
+
+具有特殊意义的字符叫作元字符（//、^、[]、. 、\d）  是元字符的一定是原子，原子不一定是元字符
+
+|或    assa|dasdas  或前面是一个整体，后面是一个整体
+
+（） 当在正则里使用括号的时候，括号里的东西就会作为一个整体（原子分组），将括号里匹配的值压入内存以便调用
+
+
+\1 是对前面第一个括号的引用（引用的是括号里的值） \2是对第二个括号的引用  （反向引用）
+取消反向引用(?:b|e)  括号里加?:   不会将括号里匹配的值压入内存
+
+
+
+量词
+\d{11} 匹配11次，作用它的前一个
+\d{3,5}  表示的是3-5次
+\d{3,}  表示的是3-n次
+
+
++表示匹配一次或多次
+*表示匹配0次或多次
+?表示匹配0次或1次  0次输出''
+正则倾向多次匹配，叫作贪婪匹配（在匹配成功的前提下）
+
+吝啬匹配 （在量词后面加?）更倾向于匹配成功的前提下
+
+let reg=/b\d{4,5}?/;
+let str='11接电话时看到好多b123123';
+console.log(reg.exec(str));
+
+边界匹配：
+^代表字符串的开头 $代表字符串的结尾
+let reg=/^\d{11}$/;  开头和结尾必须是数字
+
+
+中文字匹配的范围[\u4E00-\u9FA5\uf900-\ufa2d]
+
+
+
+jQuery特点：快速，小巧，功能丰富，通用的可扩展的，跨平台
+核心理念：write less do more
+jquery2.0以上的版本不支持(IE6/7/8)
+$和jQuery是等价的
+jquery入口就是jQuery函数和$函数
+jQuery集合：实例化就是实例化它jQuery.fn.init  
+$(dom) 将dom对象转化为jQuery对象
+
+$('<div>',{
+	class:'two';
+	id:'box'
+}).appendTo(document.body)
+
+$('<div class='two'></div>').appendTo(document.body)
+
+
+可以用多个，等所有资源加载完毕
+$(function(){ 
+	
+})
+结构加载完就可运行js
+$(document).ready(function(){})
+
+只能用一个
+window.onload=function(){}
+
+
+$('div').each(function(index,value){
+	if(index==0){
+	return true;
+	}
+	value.innerHTML='nihao'
+})
+each()  返回 'false' 将停止循环 (就像在普通的循环中使用 'break')。返回 'true' 跳至下一个循环(就像在普通的循环中使用'continue')。
+
+$('div').get()   将jQuery集合转化为DOM集合
+get(0)  取第0个
+
+index() 可以传dom对象、jquery对象、选择器one.index('div')
+$('#bar').index(); // 不传递参数，返回这个元素在同辈中的索引位置
+
+data('aa','b')
+console.log($(this).data('aa'))
+通过data绑定的数据没有办法通过dom对象获取，因为绑定的数据在jquery对象上，不在dom对象身上。
+
+removeData('aa') 
+
+
+$('div').val(); 主要运用于表单
+
+
+offset 相对于当前视口的偏移量
+position 获取匹配元素相对于父元素的偏移，不会将自己margin值计算在内 
+
+
+
+let clone=$('div').clone()
+clone 不传值只克隆子元素，数据和事件都不会被克隆
+00
+
+let clone=$('div').clone(true)  传1个true数据和事件都会被克隆
+let clone=$('div').clone(true,false)   一个true和一个false只会克隆当前元素的，不会克隆子元素的
+
+
+
+当你给一个元素加了很多动画的时候，就会形成一条动画队列，这条队列叫fx。 （先进先出）
+
+stop()  停止当前动画，继续下次动画
+stop(true)   清空队列并立即停止动画
+stop(true,true)  清空队列并且立即完成当前动画
+finish()  清空队列并且立即到达队列中最后一个状态
+
+queue()  可以在动画队列添加动画，默认添加到队列最后，最后执行，非延迟动作会立即执行
+dequeue()  出队，用了queue()必须dequeue()
+
+currentTarget相当于当前的this
+
+e.type   多个事件绑定同一个事件处理程序的时候，判断是哪个事件触发了
+
+
+triggerHandler
+ease-out   以慢速结束 
+
+a异步j（javaScript）a(and) x(XML)     ajax
+w(windows)a(apache)m(mySql)p(PHP)     wamp
+          web服务器
+
+php （超文本预处理语言）    运行于服务器端的脚本语言，帮助服务器进行数据处理的语言。
+
+
+ajax 无刷新的网页交互技术
+
+xml  可扩展的标记语言 
+
+ajax主要用于： 登录验证、局部网页数据刷新、投票系统、深层次的导航遍历
+
+let ajax=new XMLHttpRequest();
+ajax.open('get（type）','index.php?aa=bb&cc=dd（url）','asynch（true异步，false同步）','username','password');
+
+post传数据用
+ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+ajax.send('aa=bb&cc=dd');
+
+
+ajax.onreadystatechange=function(){
+	console.log(ajax.readyState)   4代表响应完成 
+	if(ajax.readyState===4){
+		console.log(ajax.status)           200代表交互成功
+		if(ajax.status===200){
+
+		}else if(ajax.status===404){
+			alert('页面没有找到')
+		}
+	}
+}
+
+
+get/post   地址栏显示/不显示  数据量小/数据量大  post更安全
+
+
+数据库的增删改查
+
+1. 增:  
+  insert into 表名 values(0,'测试');  
+  注：如上语句，表结构中有自动增长的列，也必须为其指定一个值，通常为0  
+  insert into 表名(id,name) values(0,'尹当')--同上  
+2.删数据:  
+  delete from 表名;  
+  delete from 表名 where id=1;  
+ 删除结构：  
+  删数据库：drop database 数据库名;  
+ 删除表：drop table 表名;  
+  删除表中的列:alter table 表名 drop column 列名;  
+3. 改:  
+  修改所有：updata 表名 set 列名='新的值，非数字加单引号'   
+  带条件的修改：updata 表名 set 列名='新的值，非数字加单引号' where id=6;  
+4.查:  
+  查询所有的数据：select *from 表名;  
+ 带条件的查询：  
+  select *from 表名 where 列名=条件值;  
+  Select * from 表名 where 列名 not like（like） '字符值'  
+ 分页查询：select *from 表名 limit 每页数量 offset 偏移量;
+
+
+ file_get_contents()
+
+
+
+Node.js是一个基于Chrome V8引擎的JavaScript运行环境，Node.js使用了一个事件驱动、非阻塞式I/O的模型，使其轻量又高效。Node.js的包管理器npm，是全球最大的开源库生态系统。
+V8是一个全新的Google的开源JavaScript引擎。  
+
+
+
+ 安装node.js 配置环境变量
+ 检测成功否  node -v    npm -v
+
+ 安装node-sass：
+ 1.npm install -g node-sass       -g安装到全局
+ 2.npm install -g cnpm/cnpm install -g node-sass
+
+sass能让你以一种编程式的思维去写css
+sass的编译：
+node-sass style.scss style.css
+node-sass -w style.scss style.css   自动编译
+
+输出格式：--output-style
+
+编译风格：
+
+1.nested:嵌套缩进的css代码，它是默认值
+2.expanded:没有缩进的、扩展的css代码
+3.compact:简洁格式的css代码
+4.compressed:压缩后的css代码
+
+命令行操作
+进入d盘  d: 
+列出当前 目录文件列表 dir
+进入文件夹 cd 文件夹名称
+上个目录  cd../
+下个目录  cd./
+
+
+当将一个变量定义为一个属性名或选择器名，需要使用插值的方式
+插值  #{$n}
+
+嵌套是有节制的，不能无限向下嵌套
+
+
+不带参数的
+混合宏@mixin style{
+	
+}
+@include：style
+
+带参数的(可以指定默认值)
+@mixin style($width:0){
+	$width:0
+}
+@include: style()
+
+
+sass 数据类型
+数值类型  1 3.2 10px  2rem
+字符串  'assa'   "sdad"    red
+boolean    true false
+
+$width:1;
+@if $width=2{
+	
+}@else{
+	
+}
+
+比较的时候像> < >= <= 只能用于数值类型
+== != 可以运用任何类型
+
+继承.box的属性 (.box,.aa)继承上面所有的.box形成群组选择器
+.aa{
+	@extend .box;
+}
+不建议使用
+.aa .bb{
+	@extend .box;	
+}
+
+循环  （from 1 to 12）1~11     through 1~12
+@for $i from 1 through 12{   
+	.col-lg-#{$i}{
+		width:percentage(1/12)*$i;   （专门做百分比）
+	}
+}
+
+$i:1;
+@while $i<=12{
+	.col-lg-#{$i}{
+		width:percentage(1/12)*$i;   （专门做百分比）
+	}
+	$i:$i+1;
+}
+
+$num:lg,md,sm,xs;    值列表
+@each $i in $num{
+	.col-#{$i}{
+		width:percentage(1/12);
+	}
+}
+
+@function(){
+	
+}
+@return
+
+版本控制工具git（分布式） 、svn（不是分布式）
+
+
+git clone url       从网上克隆一个地址
+git status          查看当前的工作状态有没有更改
+git add 文件名字    添加你要提交的文件
+git commit -m '这是我提交的内容'              添加注释
+git push          将你的更改同步到网上
+
+git pull 先将服务器上面可能已经更改的文件拿下来
+git add * ....
+
+
+
+zepto.js和jQuery使用一样\
+
+
+
+在控制台运行网页，需安装 curl.exe

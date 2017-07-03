@@ -1,0 +1,393 @@
+js内置顶层函数
+
+1.Number();      将其他的数据类型转化为number ，只有数字类型的字符串能转化 ，""是0 ，true是1 ，flase是0 ，null是0 ，undefined不能转化      NaN是number里特殊的值 
+
+算数运算符隐式调用Number()，转化不了返回NaN
+
+|| && ! 
+
+关系运算符隐式调用Number(), 特殊null=undefined
+
+
+
+2.parseInt();    转化字符串，将字符串转化为整数，只转化能转化的
+
+let text="11111adada"
+console.log(parseInt(text,2))    转化字符串里的2进制数  （2~32）
+
+3.parseFloat();  将字符串转化为浮点型   
+4.String();       把任何类型转化为字符串
+5.Boolean();     NaN转化为flase
+6.isNaN();       判断是否能转化为一个数字，是数字输出flase，不是true
+
+
+对象的分类：
+1.宿主对象 （不是JS里的，而是浏览器提供的）window、document、location、history
+2.本地对象 Object、String、Boolean、日期对象
+
+另一种分法：
+本地对象：
+内置对象：Math、global
+
+
+
+BOM（包含DOM）
+顶层对象：window
+document、location、history（都是window的子对象）
+
+screen.width         浏览器的分辨率
+screen.height        浏览器的分辨率
+
+document.documentElement.clientWidth        浏览器页面的宽度
+document.documentElement.clientHeight       浏览器页面的高度
+
+
+
+self===window   selt 返回顶层
+confirm
+close
+open(url)
+
+
+window.onload=function(){                                    整个页面执行完后执行JS
+	const btn=document.querySelector("button");
+	btn.onclick=function(){
+		let result=window.confirm("您确定关闭浏览器吗？")
+			if(result){
+				window.close();
+			}
+	}
+}       
+
+
+每过1s执行一次
+let t=setInterval(function(){
+	console.log(1);
+},1000) 
+
+clearInterval(t)  
+
+ 
+执行一次
+let t=setTimeout(function(){
+	console.log(1);
+},1000) 
+
+clearTimeout(t)  
+
+
+
+location 地址栏
+
+http：//主机名（域名）：端口号/路径/锚链接/查询字符串
+host(主机名（域名）+端口号)
+hostname（主机名）
+port（端口号）
+search（字符串）
+hash（秒链接）
+href（完整的地址）
+pathname(路径)
+location.href("http://www.baidu.com")     可以获取，可以设置
+
+protocol host(hostname,port) pathname hash search   ?aa=df&&gfgf=hghg
+
+location.reload(true)    重新加载，默认先走缓存，新的才到服务器下载
+location.assign("http://www.baidu.com")    重新加载页面，会留下历史记录
+location.replace("http://www.baidu.com")   替换当前页面，不会留下历史记录
+
+
+history  历史记录
+
+只会记录从当前页面跳转的页面
+history.length  历史记录的长度
+history.back()  返回上一个    
+history.forward()   下一个
+history.go(0)  刷新
+history.go(n)  调n个页面
+
+
+DOM
+
+document.URL   只能获取当前文档的地址
+document.title=""    可以获取可以更改
+document.forms      所有表单的集合
+document.images     所有图片的集合
+
+getElementById("box")
+<div id="box"></div>   DOM对象
+getElementsByClassName("box")   DOM对象集合
+getElementsByTagName()
+getElementsByName()     表单元素
+
+
+const btn=document.querySelectorAll("button");     选取全部的
+
+let div=document.getElementsByTagName();
+let span=div.getElementsByTagName();           getElementsByTagName/getElementsByClassName  可以这样
+
+
+
+DOM对象
+对属性对内容对样式的操作
+
+获取设置内容方式：
+1.div.innerHTML(获取div里的所有内容，识别HTML标签)
+  div.innerHTML=""（设置内容）
+2.innerText  （能获取，也能设置，和上面一样，不识别标签）
+textContent（和innerText一样，有兼容性问题）
+
+
+对属性的操作
+div.id=""
+div.className=""
+img.src=""
+
+
+对样式的操作
+样式的设置
+box.style.width=""           
+box.style.marginLeft=""
+div.style.cssText="width:;height:;"
+
+classList的方法：toggle/remove/add       同时只能操作一个（类名）
+div.classList.add("")
+div.classList.toggle("")如果有删掉，没有加上，同时只能操作一个
+
+样式的获取
+console.log(box.style.width)只能获取行内样式，可以设置
+window.getComputedStyle(box,null).width; 通用的获取样式的方式，不能设置,IE不支持
+
+IE里console.log(box.currentStyle.width)
+
+
+事件：用户的一些行为或者操作就是事件
+
+鼠标事件：
+click（单击）、dblclick（双击）、mousemove（移动）、mouseover（鼠标的移入）、mouseout（鼠标的移出）、mousedown（鼠标按下）、mouseup（鼠标抬起）
+
+键盘事件：（只能作用document）
+keydown（按下）、keypress（键盘按住不动）、keyup（抬起）
+
+document.onkeydown=function(){
+	
+}
+
+表单事件：
+focus（获取焦点）、blur（失去焦点）、change（改变）
+input.focus();  获取焦点
+
+div.onclick=function(){
+	                        
+}
+
+
+
+transitionend
+div.addEventListener("transitionend",function(){         事件监听
+	
+})
+
+
+
+
+节点（5种）：文档（document）、元素(所有的标签都是元素节点)、属性、文本、注释
+每个节点都有3个属性：    节点的名字(nodeName)、节点的类型(nodeType)、节点的值(nodeValue)
+
+文档                        #document                 9                     null
+
+元素                      大写的标签名                1                     null
+
+属性                         属性名                   2                    属性值
+
+文本                         #text                    3                    文本内容
+
+注释                        #comment                  8                    注释内容
+
+
+
+div.nextSibling(下一个兄弟节点)
+div.attributes(div里的所有属性)
+div.childNodes(获取里面所有的节点)              集合
+div.children(获取里面的元素节点)                集合
+div.parentNode(获取父节点)
+div.nextElementSibling(下一个元素节点)
+div.previousElementSibling(上一个元素节点)   没有的话是null
+div.firstElementChild(第一个孩子)
+div.lastElementChild(最后一个孩子)
+div.nodeName==('DIV') 
+
+创建元素节点
+document.createElement(标签名) ;创建出来的是一个dom对象，创建的是一个元素节点
+let p=document.createElement('p')
+document.body.appendChild(p);    追加到某一个元素内部的最后面
+body.insertBefore(p,span);   （用父对象调用）创建的p标签放到span前
+
+appendChild(p)，body.insertBefore(p,span)不止可以操作新创建的元素，同时也可以操作本来就存在的元素，如果操作的是本来就存在的元素，那么原来的位置就将不存在
+
+box.removeChild(span)将一个子元素从他的父元素删除
+
+span.replaceChild(newspan,a)用新创建的span替换span的子元素a，同时也可以操作本来就存在的元素，如果操作的是本来就存在的元素，那么原来的位置就将不存在
+
+复制box
+copybox=box.cloneNode();不传参数只复制box本身
+copybox=box.cloneNode(true);同时复制box的子元素
+
+创建属性节点
+
+公用的创建属性节点和获取属性节点的值，用setAttribute(attr,value),getAttribute(attr),
+如果是标准属性，就用obj.id   obj.className  obj.src   obj.href
+
+
+obj.id   obj.className  obj.src   obj.href (标准属性)
+自定义属性data="aa"
+
+div.setAttribute('data','aa')万能的创建属性方法
+div.getAttribute('data')
+
+
+
+
+创建文本节点
+
+obj.innerHTML
+obj.innerText
+obj.textContent
+
+
+box.offsetWidth              页面中实际所占的宽高和尺寸，获取的直接是数值，不包含margin的值，其他都包含
+box.offsetHeight
+
+
+
+box.offsetLeft               
+box.offsetTop
+距离页面左边，上部的距离，如果上级元素有定位属性，那么计算的是距离上级定位元素的距离
+
+
+document.documentElement.clientWidth        浏览器页面的宽度
+document.documentElement.clientHeight       浏览器页面的高度
+
+window.onresize=function(){
+	
+}
+
+
+
+滚动条
+scrollTop            获取滚动条
+scrollLeft
+console.log(document.body.scrollTop)    支持谷歌
+console.log(document.documentElement.scrollTop)   支持火狐
+
+offsetTop=screenHeight+scrollTop     刚好出现
+offsetTop=scrollTop    刚好消失
+
+window.onscroll=function(){}   检测滚动
+
+
+
+事件源 （事件发生在谁身上谁就是事件源）
+事件处理程序（js对事件的响应）
+div.addEventListener(click,function(){
+	
+},false)                  对同一个事件可以添加多个事件处理程序
+
+删除事件（谷歌火狐支持）
+div.addEventListener(click,fun,false)              false事件流
+function fun(){
+	alert(1);
+}                
+div.removeEventListener(click,fun)
+
+IE
+div.attachEvent('onclick',fun)    添加事件
+div.detachEvent('onclick',fun)    删除事件
+
+
+事件对象：在事件发生的时候会默认创建一个对象，保存事件发生后的所有信息
+div.onclick=function(e){} 事件对象会自动赋给e
+e里面的值：
+altKey:false
+cancelBubble:false;
+clientX:55         距离当前可视区域的左上角距离
+clientY:63
+ctrlKey:false
+currentTarget:
+offsetX:5          距离本元素左上角的距离
+offsetY:5
+pageX:9            距离body左上角的距离
+pageY:5
+returnValue:true
+screenX:5          距离屏幕左上角的距离
+screenY:5
+shiftKey:false
+srcElement:div
+target:div          获取目标事件源，获取是dom对象
+type:"click"
+e.preventDefault();     禁止默认动作，谷歌火狐支持
+e.stopPropagation(); 阻止事件流，阻止事件向上传播
+
+
+
+谁去调用函数，谁就是this，如果没人调用，ES6里是undefined，5里是window（不包括箭头函数）
+
+
+let obj={aa:'bb'};
+function fun(name,age){
+	console.log(this)
+	this.name=name;
+	this.age=age;
+}
+fun.call(obj,'lisi',20) 转化this指针
+fun.apply(obj,['list',20])  传参以数组形式，其余没区别    （箭头函数不适用）
+
+箭头函数没有自己的this，它的this指的是上一级this，它的this在定义的时候就决定了，
+箭头函数的this是没办法改变的(不能用call/apply改变this的指向)，只会继承定义时父环境中的this。
+普通函数this取决于运行时，谁去调用this就会指向谁
+
+滚轮事件
+mousewheel
+function fun(e){
+	let nub=e.wheelDelta||e.detail;        
+}
+div.addEventListener('mousewheel',fun,false)       谷歌
+div.addEventListener('DOMMouseScroll',fun,false)   火狐    false换成true就触发捕获型事件流
+
+console.log(e.wheelDelta)   谷歌  上120，下-120
+console.log(e.detail)       火狐  上-3，下3
+
+e.preventDefault();     禁止默认动作，谷歌火狐支持
+e.stopPropagation(); 阻止事件流，阻止事件向上传播
+
+
+
+e.KeyCode 获取键盘按下键所对应的ASCII码
+document.onkeydown=function(e){
+	let code=e.KeyCode;
+	console.log(String.fromCharCode(code))  输出是大写，+32输出是小写
+}
+
+
+事件流
+事件执行的顺序，当页面中一个元素触发事件后，父元素乃至整个文档都会按照一定的顺序来触发事件，事件触发的顺序就叫事件流。
+
+冒泡型事件流：从当前元素开始一直向上，直到根节点位置去触发事件（默认都是冒泡型事件流）
+
+捕获型事件流：从根节点向当前的元素去触发
+
+先执行捕获后执行冒泡
+
+事件委派：利用事件流做的事(本应子元素执行，委派给父元素)
+e.stopPropagation(); 阻止事件流，阻止事件向上传播
+
+一个新添加进来的元素，我们给他添加事件的时候用事件委派
+事件优化的时候用事件委派
+一般情况下ajax返回来的数据如果要放在页面中做事件，都要用到事件委派
+
+document.body.onclick=function(e){
+	e.target                     获取目标事件源
+	e.srcElement
+}
+
+
+

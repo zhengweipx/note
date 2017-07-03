@@ -1,0 +1,306 @@
+HTML5新特性：
+1、文档声明
+2、新的特殊内容元素，比如：article,footer,header,nav,section(一块一块).
+3、新的表单控件,比如：calendar,date,time,email,url,search
+4、用于绘画的canvas元素
+5、用于媒体播放的video和audio元素
+6、对本地离线存储的更好的支持
+7、关于通信的webSocket
+8、可伸缩矢量图的svg
+
+语法规则：
+1、标签必须小写
+2、属性值可以不加""
+3、可以省略某些标签（html，body，head，tbo   dy）
+4、可以省略某些结束标签（tr，td，li）
+5、单标签不用加结束标签
+6、新添加的标签（nav，header，footer等）
+7、废除的标签（font，center，big）
+
+<figure>
+	<figcaption></figcaption>
+	<img src="">
+</figure>
+
+code表示一段代码块
+
+time表示时间值，属性datetime
+
+audio支持mp3、ogg
+video支持mp4、ogg
+<video width="" height="">
+	<source src="" type="video/a.mp4"></source>
+</video>
+<video width="" height="" src="" controls="controls"></video>
+
+画布<canvas id="" width="" height=""></canvas>
+
+<input type=url name=url form=myform value= required=required(值必填)>
+<input type=email name= form=myform value= required>
+type=tel和text没有任何区别 pattern=""（正则表达式）
+
+<input type="date" name="time">(年月日)
+<input type="time" name="">(时间)
+<input type="month" name="">(年月)
+<input type="week" name="">(周)
+<input type="datetime-local" name="">(当地时间)
+
+<form action= method= id=myform novalidate=""(取消验证)>
+
+<input type="range" name="" max="" min="" value="">(滑块)
+<input type="number" name="" max="" min="" value="" step="2"(跳2个)>
+<input type="text" name="" value="" webkit-input-placeholder=""(写字会消失) autofocus="autofocus"(获取焦点) autocomplete="on/off"(自动完成,提示)>
+
+<input type="search" name="">(后面有个人×)
+
+<input type="text" name="" list="sel">
+	<datalist id="sel">
+		<option value=""></option>
+		<option value=""></option>
+	</datalist>
+
+
+css3
+	web页面=结构+表现+行为
+	1.选择器
+	2.盒模型
+	3.背景、边框
+	4.颜色模式
+	5.文字特效
+	6.2D/3D转换
+	7.过滤、动画
+	8.多列布局
+	9.用户界面
+	10.响应式
+
+伪元素选择器
+    section::first-letter{}（第一个字）
+    section::first-line{}（第一行）
+    两个冒号说明是伪元素，可以用一个
+
+
+清除浮动
+    :after{
+    content:(必写)
+    }
+    (在元素的后面添加东西)
+    :before(在元素的前面添加东西)
+
+属性选择器
+   	section[id]
+
+ 	多个类名用空格隔开
+
+ 	section[class~=one]{}(选择类名中用空格隔开的)
+ 	section[class|=one]{}(选择以one-开头的或者等于one)
+ 	section[class^=one]{}(选择以one开头的)
+ 	section[class$=one]{}(选择以one结尾的)
+ 	section[class*=one]{}(选择有one的)
+
+
+ 子选择器
+ 	section > span{}
+
+ 兄弟选择器
+ 	section + div{}(选择后面紧跟的同级元素)
+
+ 	section ~ div{}(选择后面所有的div)
+
+ :root{}选择html根元素，就是html
+
+ section:first-child{}(选择section为第一个子元素)
+ section:last-child{}(选择section为最后一个子元素)
+ section:nth-child(n){}(选择section为第n个子元素)
+                   2n                 偶数
+                   odd                奇数
+                   even               偶数
+ section:nth-last-child(n){}(选择section为第倒数n个子元素)
+                   2n                 偶数
+                   odd                奇数
+                   even               偶数
+ section:only-child{}(section为唯一的子元素)
+
+ section:first-of-type{}(这类型section的第一个元素)
+
+ section:empty{}(选择子元素为空的)
+
+ UI伪类选择器:（主要作用表单）
+
+ input:enabled{}（选择可用的）
+ input:disabled{}（选择禁用的）
+ :checked{}（选择选中的）
+ :not(.one)(选中没.one的)
+ ::selection{
+   color:
+   background:
+ }(选中元素里面内容部分)
+
+CSS3 hack
+ -moz-
+ -ms-（IE）
+ -o-
+ -webkit-
+
+ -webkit-input-placeholder{} (修改输入框默认值属性)
+
+ :valid{}(输入正确的)
+ :invalid{}（不正确的）
+
+ :target{}(选中目标元素)
+
+
+css3阴影（box-shadow）
+box-shadow:0 0 0 0 #hfh inset
+(x偏移 y偏移 模糊 实体 color 内)
+
+border-image(给边框加图片)
+border-image-source:url();
+border-image-width:
+border-image-slice:20;(截取图片)
+border-image-repeat:round(平铺)repeat(重复)stretch(拉伸)
+border-image-outset:
+
+
+box-sizing:border-box;(盒子边框在内容最外)
+background-clip:border-box/padding-box/content-box;(裁剪)
+background-origin:border-box/padding-box/content-box;（绘制）
+背景的默认的开始绘制区域是padding-box；
+背景的默认的裁剪区域是border-box
+background-size:x y /cover(覆盖盒子)/contain(放入盒子);
+
+css3颜色和渐变
+HSL模式和HSLA模式
+色调(H 0~360 0表示红色 120表示绿色 240表示蓝色)
+饱和度(S 0%:gray 100%:full color)
+亮度(L 0%:black 100%:white)
+
+渐变
+1.线性渐变
+background-image:linear-gradient(to left,red 10%,blue 20%,green 10%);
+
+background-image:repeating-linear-gradient(to left,red,blue,green);(重复渐变)
+
+2.径向渐变
+
+background-image:radial-gradient(red,blue,green);
+
+opacity:(透明度)
+
+倒影
+-webkit-box-reflect:below 10px ;（向下 距离）
+-webkit-box-reflect:below 10px linear-gradient(to left,red,blue,green);（倒影遮罩）
+-webkit-box-reflect:below 10px url(czx.png);(图片倒影必须是png格式)
+
+过度
+transition:all 1s;
+transition-property:width/background/all;
+transition-duration:1s;
+transition-timing-function:linear直线匀速/ease规定慢速开始，然后变快，最后慢速结束/cublic-bezier:();(运动方式)
+transition:all 1s linear ;
+
+
+多列
+column-count:3;(3列)
+column-width:;(最小的一列的宽度)
+column-gap:1em;(列之间的宽度)
+em是个倍数单位，根据当前文字大小计算宽度
+column-rule:2px solid #000;(列之间的样式)dotted（虚线）
+column-fill:auto;(第一列排满)/balance(每列高度平衡)
+
+输入框
+resize:none(定死，不能缩放)/vertical(纵向)/horizontal(水平)
+
+div可以随便拉大拉小
+resize:auto;
+overflow:hidden;
+
+轮廓（不占文档流）
+outline:1px solid #000;
+
+white-space:nowrap;(强制不换行)
+text-overflow:ellipsis;(超出的文本用...表示，只能处理单行)
+
+只作用英文，强制换行
+word-break:break-all;（以字母换行）
+word-wrap:break-word;(以单词换行)
+
+text-shadow:0 0 3px red;
+
+
+定义自己的字体
+@font-face{
+	font-family:"ms";
+	src:url();
+}
+
+定义动画
+@keyframes 动画名字{
+	from{
+		width:200px;
+	}
+	to{
+ 		width:400px;	
+	}
+}
+
+animation-name:动画名字;
+animation-duration:2s;
+animation-iteration-count:2/infinite(无穷的);(定义运行次数)
+animation-direction:alternate(往返的);(方向)
+animation-timing-function:linear;(运动方式)steps(8);步骤
+animation-fill-mode:forwards/backwards(保持原来的位置);(停到最终的位置)
+animation-delay:2s;(延迟)
+animation-play-state:paused;(停止运动)
+
+animation:名字 时间 方式 延迟 次数 方向 位置 停止;
+
+2D/3D转换
+
+transform:translateX()/translate();(平移)
+transform-origin:left(x) center(y);(缩放轴)
+transform:scale(1);(缩放，>1放大 <1缩小)
+transform:rotate();
+transform:skew();
+
+perspective:（z轴,立体感,景深）
+perspective-origin:(定义观察者位置)
+
+transform-style:preserve-3d;()
+transform-origin:
+
+backface-visibility:hidden(隐藏)/visible(可见);(面是否背着我们)
+
+一般先平移再旋转
+transform:translateX(200px) rotate(45deg)
+
+text-align:justify;(两端对齐文本)
+
+
+
+大屏(lg) 1200以上     1170(内宽)
+中屏(md) 992-1200     970
+小屏(sm) 768-992      750
+超小屏(xs)   768      100%
+
+
+
+垂直居中（父元素没高度）
+position：absolute;
+left:0;
+top:0;
+right:0;
+bottom:0;
+margin:auto auto;
+
+三角形用边框做；
+width：0；
+height：0；
+margin：0 auto；
+border-top：
+border-left:
+border-bottom:
+
+
+
+取消hover效果
+pointer-events:none;

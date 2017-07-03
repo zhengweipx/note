@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>正则</title>
+	</head>
+	<style type="text/css">
+		
+	</style>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+//	正则:是一种用来匹配或者是检测符合某种规范的字符串的语言.
+
+//RegExp();//正则对象
+
+//两个方法
+//test()
+//exec()
+
+//第一种创建方式
+//const reg=new RegExp();
+//console.log(reg)//    /(?:)/空
+//
+//const reg=new RegExp('a');
+//console.log(reg)//（/a/是一个正则表达式）
+//
+//const reg=new RegExp('a','imgy');//正则表达式，模式修正符（i，m，g全局匹配，y）
+//console.log(reg)   //   /a/gimy
+//
+//第二种创建方式
+//const reg=/a/i;  //   /a/i可以称为正则表达式，//两斜杠中间的内容叫定界符
+//console.log(reg)
+
+
+//第一种检测方式
+//let reg=/abcd/;
+//let str='abcdefg'
+//console.log(reg.test(str));//布尔类型，检测字符串中有没有正则表达式（不许有穿插）
+
+//let reg=/acbcd/;
+//let str='abcdefg'
+//console.log(reg.test(str));//不许有穿插
+
+
+//第二种检测方式
+//let reg=/a1bcd/;
+//let str='abcdefg'
+//console.log(reg.exec(str));//失败null
+
+//let reg=/abcd/;
+//let str='abcdefg'
+////console.log(reg.exec(str));//成功是一个数组Array，数组中有特殊的键
+//////0键：匹配到的值；index键：匹配到的字符开始的位置；input键：检测的字符串
+////console.log(reg.exec(str)['index']);
+//let result=reg.exec(str);
+//console.log(result['index']);
+//console.log(result.index);//对
+////console.log(result.0);//错,不能这样跟数字
+//console.log(result[0]);//对
+//console.log(result['0']);//对
+
+
+//从左到右依次检测，检测成功成功后，立即返回
+//let reg=/abcd/;
+//let str='abcdabcd'
+//console.log(reg.exec(str));//只输出1个
+
+
+//加了g（全局匹配）后，一定会从字符串开头检测到结尾
+//let reg=/abcd/g;
+//let str='abcdabcd'
+//console.log(reg.exec(str));
+
+//有一个属性reg.lastIndex,定义它下次检测的时候从哪里开始(它下次检测开始的位置),最后一次检测失败,置0
+//g对exec有影响,就是因为检测后改变了reg.lastIndex属性
+//let reg=/abcd/g;
+//let str='abcd123abcd'
+//let result1=reg.exec(str);
+//let result2=reg.exec(str);
+//let result3=reg.exec(str);
+//console.log(result1,result2,result3);
+
+//let reg=/abcd/g;
+//let reg=/abcd/;
+//let str='abcd123abcd'
+//console.log(reg.lastIndex)
+//let result1=reg.exec(str);
+//console.log(reg.lastIndex)
+//let result2=reg.exec(str);
+//console.log(reg.lastIndex)
+//let result3=reg.exec(str);
+//console.log(reg.lastIndex)
+//console.log(result1,result2,result3);
+
+
+//let reg=/abcd/g;
+//let str='abcd123abcd12';
+////let str='12312';
+//let result1;
+//do{
+//	result1=reg.exec(str);
+//	if(result1){
+//		console.log(result1)
+//	}
+//}while(result1)
+
+
+
+//  /12asa12/里面的数值或字母，我们称之为原子。原子是构成正则表达式的最小单位，任何一个数字，字母，符号都是原子。
+//  \d  [匹配0~9任意一个数字]
+//  \w  [匹配数字、字母、下划线任意一个字符]
+//  \s  [匹配任意一个空白字符]空格，换行
+//  .   [匹配除了换行符之外的所有一个字符]\n是换行（字符换行）
+//  \D,\W,\S，除了。。。
+//  以上也都是原子（特殊的原子）
+//let reg=/\d/;
+//let str='abc123';
+//console.log(reg.exec(str))
+
+//let reg=/\D/;
+//let str='1abc123';
+//console.log(reg.exec(str))
+
+//let reg=/\s/;
+//let str='1a bc123';
+//console.log(reg.exec(str))
+
+//let reg=/\S/;
+//let str='1a bc123';
+//console.log(reg.exec(str))
+
+//let reg=/..../;
+//let str='1a bc123';
+//console.log(reg.exec(str))
+
+//let reg=/./;
+//let str='\n';
+//console.log(reg.exec(str))
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//原子表（原子的组合）
+//let reg=/[5-9]/;//仅仅只能匹配一个字符
+//let reg=/[15-9]/ //1或5-9
+//let reg=/[0-9a-zA-Z_]/ //相当于\w
+//let reg=/[156789]/;//自带'或'
+//let str='abc1235';
+//console.log(reg.exec(str))
+//
+//let reg=/[^0-9]/;//除了0-9以外任何一个字符，^写在括号[]中为反，不在为开头
+//let str='1abc123';
+//console.log(reg.exec(str))
+
+
+//正则里表示具有特殊意义的字符称为元字符([ ] - ^ / / \d . |)
+//是原子的不一定是元字符,是元字符的一定是原子
+
+
+//let aa=[]     //数组
+//let aa={}     //对象
+//let aa=()     //错
+//let aa=//    //错
+
+
+//let reg=/ab|ac/;// [ac]  或（前面是一个整体，后面是一个整体）
+//let reg=/a(b|a)c/ // ["aac","a"]  当我们在正则里面使用括号的时候，括号里的东西就构成原子分组，它会把括号里匹配到的值，压入内存，以便调用。
+//let str='aac';
+//console.log(reg.exec(str))
+
+//let reg=/a(b|a)(\d)c/     //["aa1c","a","1"]
+//let str='aa1c';
+//console.log(reg.exec(str))
+
+
+//let reg=/a(b|a)(\d)c\1/  //   \1 反向引用，是对前面第一个括号(的值)的引用
+//let str='aa1cas';
+//console.log(reg.exec(str))
+
+//let reg=/a(b|a)(\d)c\1/  
+//let str='aa1c';
+//console.log(reg.exec(str))    //null
+
+//let reg=/a(\d)c\1/  //   \1 反向引用，是对前面第一个括号的引用
+//let str='a2c2';
+//console.log(reg.exec(str))
+
+//
+//let reg=/a(?:\d)c/  //   取消反向引用，括号前加？：，仅仅提高优先级，不压入内存
+//let str='a2c2';
+//console.log(reg.exec(str))   //[a2c]
+
+//
+//匹配电话号码
+////量词：
+//+  [匹配一次或多次]
+//*  [匹配零次或多次]
+//?  [匹配0次或1次]
+
+//let reg=/\d{11}/   //量词，匹配11次，作用它的前一次
+//let reg=/\d{3,5}/   //3次，4次，5次，（3到5次）   [12345]
+//let reg=/\d{3,}/    //最少匹配3次，（3到n次）  [12345678912]
+//let str='这是一串电话号码12345678912';
+//console.log(reg.exec(str))
+
+//let reg=/\d+/      //[123123]贪婪匹配
+//let reg=/\d+?/     //[1]吝啬匹配
+//let reg=/\d*/       //空
+//let reg=/\d?/    //匹配到空，不是空格（用/\d{0}/也可以匹配到空）
+//let reg=/\d{0}/    //空
+//let reg=/\d+b/      //[123123b]
+//let reg=/\d+?b/      //[123123b]更倾向于匹配成功的前提下吝啬匹配
+//let reg=/\d*?b/     //[123123b]
+//let reg=/\d{4,5}?b/   //[23123b],1开始，最多5次，不匹配，扔掉1，从2开始，匹配，结果23123b
+//let reg=/\d??b/    //[3b]
+//let str='这是一串电话号码123123b';
+//console.log(reg.exec(str))
+
+////let reg=/\d+/    //[456]
+//let reg=/\d*/      //[456]
+//let reg=/\d*?/       //空
+//let reg=/\d?/       //[4]
+//let reg=/\d+b/     //[123123b]
+//let reg=/\d+?b/    //[123123b]
+//let reg=/\d*?b/    //[123123b]
+//let reg=/\d{4,5}?b/   //[23123b]
+//let reg=/\d??b/    //[3b]
+//let str='456这是一串电话号码123123b';
+//console.log(reg.exec(str))
+
+//let reg=/b\d{4,5}/   //[b12312]贪婪匹配
+//let reg=/b\d{4,5}?/    //[b1231]吝啬匹配
+//let str='这是一串电话号码b123123';
+//console.log(reg.exec(str))
+
+//正则是偏向多匹配的，从左往右进行匹配，匹配成功后，向后看一位，直到不成功停止
+//倾向于多匹配，叫做贪婪匹配，但是贪婪匹配是在匹配成功的前提下贪婪匹配的
+
+//吝啬（linse）匹配：启动吝啬匹配，在量词后面加？，更倾向于匹配成功的前提下吝啬匹配
+
+
+//边界匹配
+//let reg=/^\d{11}$/   //^代表开头，$代表结尾,此时表示只能以数字开头和结尾
+//let reg=/^\d{11}/
+//let reg=/\d{11}/ 
+//let str='a12345678912b';
+//let str='12345678912b';
+//let str='12345678912';
+//console.log(reg.exec(str))
+
+
+
+
+////i代表不区分大小写
+//let reg=/^b$/   
+//let str='B';
+//console.log(reg.exec(str))    //null
+
+//let reg=/^b$/i   
+//let str='B';
+//console.log(reg.exec(str))//B
+
+
+////m代表多行匹配
+//let reg=/^\d$/ 
+//let str='2';
+//console.log(reg.exec(str))  //2
+
+//let reg=/^\d$/ 
+//let str='a\n2';
+//console.log(reg.exec(str))  //null
+
+//let reg=/^\d$/m 
+//let str='a\n2';
+//console.log(reg.exec(str))  //2
+
+////y代表默认加^,规定了开头
+//let reg=/\d/ 
+//let str='abc12';
+//console.log(reg.exec(str))   //1
+
+//let reg=/\d/y 
+//let str='4abc12';
+//console.log(reg.flags)   //模式修正符
+//console.log(reg.source)  //定界符
+//console.log(reg.exec(str))   //4
+
+//let reg=/\d/y 
+//let str='abc12';
+//console.log(reg.exec(str))   //null
+
+
+//)))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+//\的意思是转意,
+//碰到特殊意义的字符,要匹配需要转意
+//let str='\n';   //输出换行
+//let str='\\n';    //输出\n
+//let str='\\';     //输出\
+//let str='\';    //报错，它以为你要转意
+//let str='.';    //输出.
+//let str='[';    //输出[
+//let str='\[';    //输出[
+//console.log(str) 
+
+//let reg=/./    //[匹配除了换行符之外的所有一个字符],是一个原子
+//let str='n.';
+//console.log(reg.exec(str))
+//let reg=/\./    //\.表示一个点，匹配下面字符串的第二个
+//let str='n.';
+//console.log(reg.exec(str))
+
+//let reg=/\\/ 
+//let str='\\';    //代表\
+////let str='\'; //报错，它以为你要转意
+//console.log(reg.exec(str))
+
+//let reg=/\[/ 
+//let str='\[';
+//console.log(reg.exec(str))
+//let reg=/\[/ 
+//let str='[';
+//console.log(reg.exec(str))   //前两个都匹配到了
+//let reg=/[/    //报错,原子表
+//let str='[';
+//console.log(reg.exec(str))
+
+//let reg=/\[\]/ 
+//let str='[]';
+//console.log(reg.exec(str))
+
+
+
+
+//字符串的方法,可以配合正则使用
+//split()
+//replace()
+//match()
+//search()
+
+
+
+//*match()和exec几乎是一致的
+//let reg=/\d/ 
+//let str='223456';
+//console.log(str.match(2));  //可以匹配，exec几乎是一致的，0输出的是匹配到的值
+//console.log(str.match(reg));
+
+//不同:加了全局g后,它会将所有匹配到的字符组合成一个数组
+//let reg=/\d/g;
+//let str='123456';
+//console.log(str.match(reg));   //["1", "2", "3", "4", "5", "6"]
+
+//let reg=/\d/ 
+//let str='abc';
+//console.log(str.match(reg));   //没有匹配到的值，输出null
+
+
+
+//*search,加g没影响,第一个匹配的下标
+//let reg=/\d/;
+////let str='223456';
+////console.log(str.search('2'));//结果：0；返回下标，
+//let str='a223456';
+//console.log(str.search(reg));  //结果：1；返回下标，
+
+//let reg=/[a-z]/;
+//let str='123456';
+//console.log(str.search(reg));  //没有匹配到的值，输出-1
+
+//let reg=/\d/g;
+//let str='ab223456';
+//console.log(str.search(reg));    //加g没影响,还是返回第一个匹配的下标
+
+
+
+
+//*split默认加g   //字符串分割为数组
+//let reg=/\d/;
+//let str='a1b2c3d';
+////console.log(str.split('1'));//["a", "b2c3d"]
+//console.log(str.split(reg));//["a", "b", "c", "d"]
+
+
+
+//*replace加g替换全部，不加替换第一个//替换
+//let reg=/\d/;
+//let str='1234561';
+//console.log(str.replace('1','n'));  //n234561
+//console.log(str.replace(reg,'n'));   //n234561
+//
+//let reg=/\d/g;
+//let str='1234561';
+//console.log(str.replace(reg,'n'));  //nnnnnnn
+
+
+
+
+
+
+
+
+
+
+
+//程序》》》》》》》》》
+//str.trim();//去除空格
+//str.trimLeft();//去除左边空格
+//str.trimRight();//去除右边空格
+//电话号码
+//身份证
+////reverse反向
+
+
+//	let str='     a  bc      '
+////	let result=str.trim()   //a  bc
+////	let result=str.trimLeft()   //
+//	let result=str.trimRight()    //
+//	console.log(result)  
+
+    
+//	function trim(str,way='b'){
+//		let reg;
+//		switch(way){
+//			case 'b':
+//				reg=/^\s*|\s*$/g;	
+//				str=str.replace(reg,'');
+//				break;
+//			case 'l':
+//				reg=/^\s*/;
+//				str=str.replace(reg,'');
+//				break;
+//			case 'r':
+//				reg=/\s*$/;
+//				str=str.replace(reg,'');
+//				break;
+//			case 'o':
+//				reg=/\s/g;
+//				str=str.replace(reg,'');
+//				break;
+//		}		
+//		return str;
+//	}
+//  let str='     a   bc           ';
+//  console.log(trim(str,'l'));
+// 
+
+
+
+//电话号码/^1[3578]\d{9}$/
+//邮箱/^\w+@(qq|163|139|126|sina|sohu|189|gmail)\.com$/
+//身份证18位/^\d{10}(?:0[1-9]|1[0-2])\d{5}(x|\d)$/i
+
+//用户名  6-20 数字,字母,下划线(密码)
+///^\w{6,20}$/
+//必须有数字和字母的结合
+///\d[a-zA-Z]|[a-zA-Z]\d/
+
+
+//非法字符//正则中会把中文看成字符串
+///共产党|马松|毒品/
+
+//console.log(escape('共产党'))//中文的unicode码
+
+//中文表示范围[\u4E00-\u9FA5\uf900-\ufa2d]
+//let reg=/[\u4E00-\u9FA5\uf900-\ufa2d]/ 
+//let str='中文';
+//console.log(reg.exec(str)) 
+
+
+
+
+
+//网址
+///^(?:http|https):\/\/www\.[0-9a-z]+\.(?:com|cn|edu|net|club)/i
+
+
+
+
+
+//map,forEach,find
+
+
+
+
+
+
+
+
+</script>

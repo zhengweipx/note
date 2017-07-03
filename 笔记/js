@@ -1,0 +1,825 @@
+ECMA欧洲计算机制造商协会
+
+ECMAScript 5.0   2009.12
+ECMAScript2016
+
+javaScript是一种面向对象基于事件和对象驱动的解释型松散型语言
+var let const 声明
+
+javaScript组成部分：
+1.ECMAScript（语法） 数据类型、运算符、流程控制、函数、对象等
+2.BOM（浏览器对象模型）Browser Object Model
+3.DOM（文档对象模型）Document Object Model
+
+注释：1.行注释// 2.块注释/* */
+
+输出方式： 
+alert()弹出
+console.log()检测语法
+document.write() 识别html标签
+
+引入方式：
+1.嵌入式方式<script>...</script>可以随意放，通常放在style后面
+2.外部引入：<script src=""></script>中间不能写任何代码
+3.<a href="javascript:alert();"></a>
+4.<div onclick="alert(1)"></div>
+
+变量（用来存储数据的，任何一种类型）是内存里的一块地址单元
+变量的定义： （变量的名字不能相同，名字只能以数字、字母、下划线、$组成，数字不能开头/
+命名要有意义   第一个单词首字母大写/驼峰命名法：除了第一个单词首字母不大写后面的单词首字母大写   
+不能以关键字和保留字命名）
+1.var  （var可以声明任何变量  
+var num;变量的声明
+num=123;赋值
+
+var num=123;
+var num=123,aa=456;    
+2.let
+3.const （常量，变量的值不能变）必须声明的时候同时赋值，它有默认值undefined
+
+const必须赋值，否则会报错
+
+
+数据类型：
+1.基础数据类型
+Number/string/boolean/null/undefined/Symbol
+
+0x（代表十六进制）输出都是十进制  0o（代表8进制）0b（代表二进制）
+
+str=""  模板字符串（`ddj `）可以保存所有的空格和换行
+\n     \t 制表符Tab键      \r 回车   \f 换页或分页
+
+boolean 布尔类型： true false
+
+null 占位符
+
+undefined 只声明未赋值的变量默认值就是undefined/一个对象如果没有某个属性，那么这个属性就是undefined
+
+
+typeof判断某一值是什么类型,只能检测基础数据类型  typeof(box)/ typeof box
+typeof 检测 null 的结果是 object
+
+2.引用数据类型
+对象/函数/数组
+
+
+运算符：
+1.算数运算符
++ - * / % ++ -- 
+
+任何一种数据类型和字符串相加 +代表连接
+
+`${aa}` 把aa里的值拿出来  `${aa+bb}`
+console.log(a++)也是赋值
+
+
+2.逻辑运算符
+&& || !
+
+nub1=1,nub2=3
+console.log(nub1&&nub2) 结果是3  如果一旦能判断真假立刻停止，停止处的值就是结果
+
+假值：0、false、null、undefined、""(空字符串)
+
+先&&后||
+
+! 一定是boolean运算值
+
+3.比较运算符
+> < >= <= != === == !==
+ASCII美国信息交换表
+0 48  A 65  a 97
+
+null==undefined 为真
+
+4.赋值运算符
+
+nub=nub-5 nub-=5
+
+5.一元运算符
+
++3 -3 ! typeof delete (删除对象的属性) new
+6.三元运算符
+
+nub=3>5?a:b 
+
+7.特殊运算符
+
+() , new (用来创建对象的)
+
+3种结构：顺序结构、条件结构、循环结构
+
+let getValue=prompt("要干什么","默认值")
+
+if{  块级作用域  } 判断多个值，不可枚举的
+
+
+switch(){          判断可枚举的
+	case "":
+	break;      跳出整个循环
+	default:
+}
+
+
+continue; 结束当前循环继续下一次循环
+
+for 循环
+for(let i=1;i<5;i++){
+	console.log(i);
+}
+
+如果满足循环条件，执行循环体，不满足，跳出循环，执行完毕循环体之后再执行步进值，
+执行完步进值，判断循环条件，满足执行循环体，不满足跳出
+
+
+while(){
+
+}
+
+do{ 块级作用域
+
+}while()
+
+Math.random() 0-1随机数，最小能取到无限趋近于0，最大能取到无限趋近于1
+Math.ceil()向上取整
+Math.floor()向下取整
+Math.round()四舍五入
+
+数组 （将一些有直接联系的数据存储起来
+方便我们便于对数据的操作和管理
+
+创建数组：
+1.字面量
+arr=[1,2,3,4] 可以存储任意类型数据
+下标的方式去访问数组里的每一个值
+
+let arr=[];
+console.log(arr[]);
+console.log(arr.length);
+
+2.以构造函数的方式创建数组
+let arr=new Array();
+arr[]="";
+console.log(arr);
+
+let arr=new Array(5);5表示数组的长度
+遍历
+let arr=[1,29,12,17,6,18]
+for(i=0;i<arr.length;i++){
+	console.log(arr[i])
+}
+
+
+选择排序
+	let arr=[1,29,12,17,6,18]
+	for(i=0;i<arr.length;i++){
+		for(let j=i+1;j<arr.length;j++){
+			if(arr[i]<arr[j]){
+			let a=arr[i]
+				arr[i]=arr[j]
+				arr[j]=a
+			}
+		}	
+	}
+	console.log(arr)
+冒泡排序
+	let arr=[1,29,12,17,6,18]
+	for(i=0;i<arr.length-1;i++){
+		for(let j=0;j<arr.length-1-i;j++){
+			if(arr[j]<arr[j+1]){
+			let a=arr[j]
+				arr[j]=arr[j+1]
+				arr[j+1]=a
+			}
+		}
+	}
+	console.log(arr)
+
+
+	解构赋值(按模式匹配进行赋值)0 
+	let [a,b,c]=["a","b","c"]
+
+	let [a,b,c]="dad"  左边是数组会将右边转换为数组
+	字符串可以转换为数组，结构和数组类似
+
+	console.dir("adasd")输出结构
+    
+    let [a="a",b="b",c="c",d="d"]=[]
+
+    let [a,[b]]=["wo","men"]
+
+    let a;
+    [a]=["women"]
+
+    let a=3
+    	b=4
+    [a,b]=[b,a]
+    console.log(a,b)
+
+
+    扩展运算符（... 主要和数组、字符串一起用）经常用来做数组的合并 ，可以认为将数组展开用空格或，隔开
+
+    数组合并
+    let a=[1,2,3]
+    let b=["a","b","c"]
+    console.log([...a,...b])
+
+    let a="dsad"
+    console.log([...a]) 将字符串转换为数组 
+
+    let arr["a","b","c"];
+    let brr="dfd";
+
+
+	和解构赋值配合去使用
+    let a;
+    let arr=[]
+    [a,...arr]=["adasd","aa","bb","cc"]
+    console.log([a,arr])      ...arr只能在最后面
+   
+
+    函数（是将实现某一特定功能的代码块封装起来，以便重复使用）
+    如何创建函数：
+    1.字面量；
+
+    let fun=function(形式参数){
+
+    }
+   1. fun(实际参数)  函数运行方式          2.事件发生后运行  3. (function(){})()匿名函数的自运行
+    2.以 function 关键字创建
+
+    function(){} 匿名函数
+
+    function fun(){         
+    }
+    fun()（预解析，可以放到函数前）
+
+    3.以构造函数的方式创建
+
+    let fun=new Function("console.log(1)"); fun可以认为是它的名字
+    fun()
+
+    写在函数定义的时候，写在括号里的参数叫作形式参数（参数就是变量）默认声明：
+    写形式参数纯寸是为了接收实际参数
+     let fun=function(nub=1){  形参默认值只有实参没有传参数才起作用
+     	console.log(nub);
+    }
+   fun()    
+
+   arguments专门负责接收实参传来的参数
+
+   let add1=function([a=1,b=2]){
+   		console.log(a+b)
+   }
+   add1([])    输出3
+   let add2=function([a,b]=[1,2]){
+   		console.log(a+b)
+   }
+   add2([])    输出NaN
+
+
+
+
+   rest参数方式
+   let add1=function(a,...arr){
+   		console.log(arr)
+   }
+   add1(1,2,3,4,5)  
+
+   let add2=function(a,...arr){
+   		console.log(arr)
+   }
+   let arr["a","b","c"];
+   add2(...arr)  
+
+
+
+   函数的返回值（可以返回任意类型的值）
+   没有定义返回值函数的返回值都是undefined
+
+   遇到return函数立即停止并且返回数值，一个函数可以有多条返回语句，但最终只能返回一个值
+
+   传值
+   let a=2;
+   let b=a;
+   a=5;
+   console.log(b);
+
+   传址
+   let arr=[1,2,3];
+   let brr=arr;
+   arr[0]="a";
+   console.log(brr)
+
+
+   function fun(a,b){
+   		return a+b
+   }
+
+   let fun=(a,b)=>a+b;      js6里全新的箭头函数
+   let fun=a=>a; 
+   let fun=()=>{
+
+   }
+
+   当一个函数作为另一个函数的参数时这个函数是回调函数
+
+   function add(nub1,nub2){
+   		console.log(nub1+nub2)
+   }
+   function fun(aa,a,b){
+   		console.log(aa(a,b))
+   }
+   fun(add,1,2)
+
+   作用域
+
+   宿主环境：浏览器      执行环境：1.全局环境 （window 对象） 2.局部环境 （指的是函数环境）
+   预解析是分块的，将以 var 声明的变量和 function 声明的函数提前解析到内存中
+
+   console.log(nub)  >undefined   (提前解析，运行到下面才赋值)
+   var nub=200
+   console.log(nub)  >200
+
+   在全局环境中声明的变量是全局变量，局部环境声明的变量是局部变量。
+   全局变量拥有全局的作用域，局部变量拥有局部的作用域。
+   var 多次声明同一个变量，如果后面没有赋值，值是第一个赋值的
+ 
+   内部变量和外部变量同名时，内部变量会屏蔽掉外部变量
+
+   如果一个变量没有声明但是赋值了，那么会把这个变量当作全局变量（不要使用这样的情况）
+
+   当函数在运行的时候会默认的创建一个集合，这个集合保存了当前函数所有可见范围内的变量和对象，
+   这个集合就是作用域链
+
+
+   闭包
+   当一个函数内部再嵌套一个函数的时候，内部函数会用到外部函数的变量，当我们在外部去引用
+   内部函数的时候就形成了闭包
+
+   function fun(){
+    var nub=200;
+    function fun2(){
+      console.log(nub);
+    }
+    return fun2;
+   }
+   let aa=fun();
+   console.log(aa());
+
+
+   {  let声明会产生 块级作用域 (变量只能用于内部)   
+   }
+   同一块级作用域下不允许变量名相同      （只要有{}就能形成块级作用域）
+
+   在一个块级作用域里面再声明一个函数要用字面量形式 let fun=function(){}
+   一般不要在块级作用域里声明函数
+
+   console.log(nub)   暂时性死区，let不存在变量的提升或不存在预解析
+   let nub=2;
+   console.log(nub)
+
+   以let const 声明的变量只在块级作用域里有意义，外部访问不到，不存在变量的提升，不允许同名
+
+
+   递归
+
+   一个函数不停的调用自己就叫递归
+   斐波那契数
+   1 2 3 5 8 13 21 ....
+   function di(n){
+      if(n==2){
+        return 2
+      }
+      if(n==1){
+        return 1
+      }
+      return di(n-1)+di(n-2)
+   }
+   console.log(di(5))
+
+严格模式主要有以下限制：( "use strict")
+   1.变量必须声明后再使用    ！！！
+   2.函数的参数不能有同名属性   ！！！
+   3.不能使用前缀0,0表示八进制   ！！！
+   4.不能删除不可删除的属性    ！！！
+   5.不能删除变量delete prop，会报错，只能删除属性delete global【prop】
+   6.eval不会在它的外层作用域引入变量
+   7.eval和auguments不能被重新赋值
+   8.arguments 不会自动反映函数参数的变化
+   9.不能使用arguments.callee     ！！！
+   10.不能使用arguments.caller
+   11.禁止this指向全局变量     ！！！
+   11.不能使用fn.caller和fn.arguments获取函数调用的堆栈
+   12.增加了保留字 (protected static interface)     ！！！
+   13.不能使用with语句
+   14.不能对只读属性赋值
+
+
+
+
+   if(arr[i] instanceof Array)   判断是不是数组
+
+
+    人们研究的任何事物都可以看做是对象
+    类是对象的抽象，对象是类的实例化（先有对象）
+    面向对象的几大特征：封装、继承、多态、类
+    js里只说 封装、继承。
+
+    如何创建对象：（任何一个对象都有一个属性_ _proto_ _）
+    1.字面量
+
+    let obj={
+      aa:5,      属性的名字默认都是字符串
+      cc:6,
+      dd:function(){    方法（属性是个函数时叫方法）
+
+      }
+    }
+    console.log（obj.aa)    访问对象的一个属性用.   
+    2.构造函数
+
+    function fun(){
+
+    }
+    let obj=new fun()
+    3.object 
+
+    let obj=new Object()  
+    (所有的对象都可以看做是由Object创建的，Object可以看成是最顶层对象)
+
+    4.class fun(){      （本质上还是以构造函数创建）
+
+    } 
+    let obj=new fun()
+
+属性表达式
+    let aa="name"
+    let obj={
+      [aa]:"lisi"                []取值，可以运行函数
+    }
+    console.log(obj)
+
+
+    console.log(obj["age"])  []访问里面必须是字符串
+    console.log（obj.aa)     .只能这样写
+
+    遍历
+    for(let i in obj){       
+      console.log(obj[i])
+    } 
+
+
+    Object.keys()
+    for(let i of obj){      i是obj里的值，不能直接遍历对象
+      console.log(i)
+    }
+    for(let i of Object.keys()){      
+      console.log(i)
+    }
+
+    Object.keys()      键
+    Object.values()    值
+    Object.entries()   键值
+
+
+
+
+    let obj={name:"lisi"}
+    obj=null    删除这个对象
+    delete obj.name    删除这个对象的属性
+
+
+    一个引用数据类型如果它不再被引用，那么它将在某个时刻被JS的垃圾回收机制删除
+    内存泄露：如果一个对象、变量在它该被删除的时候没有删除，就叫内存泄漏
+    
+
+
+
+    let nub="height"
+    let obj={}
+    obj.name="lisi"
+    obj.age=14
+    obj[nub]="175cm"
+    obj["weight"]="50kg"
+    console.log(obj)
+
+
+    Symbol 本身就是一个函数，经常用作对象的属性名，它表示这个对象的属性是唯一的
+    任何用Symbol()创建的类型都是不相等的
+    let aa=Symbol("");  字符串的作用是为了描述这个值
+
+
+
+
+
+
+
+    解构赋值
+
+    let {name,age}={name:"lisi",age:18}
+
+    let {name="s",age=20}={name:"lisi",age:18}
+
+    let {name:s,age:d}={name:"lisi",age:18}  s="list"  d=18
+          桥
+
+
+    let{sin,cos,tan}=Math;
+    console.log(sin(Math.PI/6));
+
+
+
+    let {0:zimu,length:a}=["a","b","c"]
+    console.log(zimu,a)
+
+
+    构造函数 不成文的规定首字母大写
+    构造函数提供了对象的初始化
+
+    json格式 ：{aa:bb,bb:cc}
+    谁去调用函数，谁去实例化对象 this 指的就是谁
+    function Fun(){
+      this.name="lisi";    this就是obj
+      this.age=14;
+    }
+    Fun.prototype.talk=function(){
+      console.log(`${this.name}cry`)
+    }
+    let obj=new Fun();
+
+    prototype(原型 ，它的值的类型是对象)
+    实例化对象能够继承构造函数prototype身上的属性
+
+    new 的时候发生了3件事：
+    1.new Object(){}  创建一个空对象
+    2.让创建出来的对象去执行构造函数（转化this指针）
+    3.让这个对象的__proto__指向构造函数的prototype
+
+
+    任何一个普通对象都有__proto__    任何一个函数对象都有prototype
+
+
+    《js语言精髓》《js权威指南》
+
+
+    类的本质也是构造函数 ，类里必然有constructor(和上面几乎一样，只是换了种写法)
+    class Fun{
+      constructor(name,age){         function Fun(){
+                                 =      this.name="lisi";    this就是obj
+                                        this.age=14;
+                                      }
+        this.name=name;
+        this.age=age;
+      }
+      talk(){
+                       
+      }
+    }
+    let obj=new Fun("lisi",18)
+
+
+
+
+    class Animal{
+      // 父类自己的构造函数constructor，提供父类实例化对象的初始化
+      constructor(name,age){
+        this.name=name;
+        this.age=age;
+      }
+      talk(a){
+          console.log(a)             
+      }
+    }
+    class Dog extends Animal{  
+    // 子类自己没有this，必须调用父类的构造函数去继承this，super()代表了
+    // 去运行父类的构造函数，运行了super后，就可以去使用this   
+      constructor(name,age,sex){
+        super(name,age);           Dog没有this必须去继承父类的this(用super调用)
+        this.sex=sex;
+      }
+      talk(a){
+          console.log(a)             
+      }
+    }
+    let Taidi=new Dog("lisi",18,"xiong")
+
+
+
+
+
+    push()方法可向数组的末尾添加一个或多个元素，并返回新的长度。
+    语法：arrayObject.push(newelement1,newelement2,....,newelementX)
+    push() 方法可把它的参数顺序添加到 arrayObject 的尾部。
+    它直接修改 arrayObject，而不是创建一个新的数组。
+    push() 方法和 pop() 方法使用数组提供的先进后出栈的功能。
+
+    pop() 方法用于删除并返回数组的最后一个元素。
+    语法：arrayObject.pop()
+    pop() 方法将删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。
+    如果数组已经为空，则 pop() 不改变数组，并返回 undefined 值。
+
+    shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+    语法：arrayObject.shift()
+    如果数组是空的，那么 shift() 方法将不进行任何操作，返回 undefined 值。
+    请注意，该方法不创建新数组，而是直接修改原有的 arrayObject。
+    该方法会改变数组的长度。
+
+    unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+    语法：arrayObject.unshift(newelement1,newelement2,....,newelementX)
+    unshift() 方法将把它的参数插入 arrayObject 的头部，并将已经存在的元素顺次地移到较高的下标处，以便留出空间。
+    该方法的第一个参数将成为数组的新元素 0，如果还有第二个参数，它将成为新的元素 1，以此类推。
+    请注意，unshift() 方法不创建新的创建，而是直接修改原有的数组。
+    注释：该方法会改变数组的长度。
+    注释：unshift() 方法无法在 Internet Explorer 中正确地工作！
+    提示：要把一个或多个元素添加到数组的尾部，请使用 push() 方法。
+
+    splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+    注释：该方法会改变原始数组。
+    语法：arrayObject.splice(index,howmany（删除的个数）,item1,.....,itemX（向里边添加的元素）)
+    splice() 方法可删除从 index 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。
+    如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组。
+
+    slice() 方法可从已有的数组中返回选定的元素。（支持负数）
+    语法：arrayObject.slice(start,end)
+    返回值
+    返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。
+    请注意，该方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()。
+    注释：您可使用负值从数组的尾部选取元素。
+    注释：如果 end 未被规定，那么 slice() 方法会选取从 start 到数组结尾的所有元素。
+
+    concat() 方法用于连接两个或多个数组。
+    该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。
+    语法：arrayObject.concat(arrayX,arrayX,......,arrayX)
+    返回一个新的数组。该数组是通过把所有 arrayX 参数添加到 arrayObject 中生成的。
+    如果要进行 concat() 操作的参数是数组，那么添加的是数组中的元素，而不是数组。
+
+    join() 方法用于把数组中的所有元素放入一个字符串。
+    元素是通过指定的分隔符进行分隔的。
+    语法：arrayObject.join(separator)  separator 连接符，默认是,
+    返回一个字符串。该字符串是通过把 arrayObject 的每个元素转换为字符串，然后把这些字符串连接起来，
+    在两个元素之间插入 separator 字符串而生成的。
+
+    sort() 方法用于对数组的元素进行排序。
+    语法：arrayObject.sort(sortby)
+    对数组的引用。请注意，数组在原数组上进行排序，不生成副本。
+    如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。
+    要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。
+    如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。
+    比较函数应该具有两个参数 a 和 b，其返回值如下：
+    若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+    若 a 等于 b，则返回 0。
+    若 a 大于 b，则返回一个大于 0 的值。（从小到大，返回a-b）
+
+
+    reverse() 倒序
+    forEach()遍历、every()、some()、map()映射、filter()筛选、find()筛选值，只能找到一个（满足 条件停止）、findIndex()  都接受回调函数，
+    每个回调函数都有3个参数（第一个值，第二个下标，最后一个数组本身）
+
+    arr.filter((value,index)=>value>3)  true 留下值, false 不留下
+
+    arr.find((value,index)=>value>3)   筛选出一个符合条件的
+
+
+    arr.forEach(function(value,index){
+
+    })
+
+     arr.forEach((value)=>){
+        console.log(value)
+    }
+
+
+    let result=arr.filter(function(value,index){
+        return ture ;             
+    })
+    console.log(result)
+
+
+    includes  判断数组里有没有这个值
+    let result=arr.includes()
+    console.log(result)
+
+    every() 方法用于检测数组所有元素是否都符合指定条件（通过函数提供）。
+    every() 方法使用指定函数检测数组中的所有元素：
+    如果数组中检测到有一个元素不满足，则整个表达式返回 false ，且剩余的元素不会再进行检测。
+    如果所有元素都满足条件，则返回 true。
+    注意： every() 不会对空数组进行检测。
+    注意： every() 不会改变原始数组。
+    语法：array.every(function(currentValue,index,arr), thisValue)
+
+    some() 方法用于检测数组中的元素是否满足指定条件（函数提供）。
+    some() 方法会依次执行数组的每个元素：
+    如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。
+    如果没有满足条件的元素，则返回false。
+    注意： some() 不会对空数组进行检测。
+    注意： some() 不会改变原始数组。
+    语法：array.some(function(currentValue,index,arr),thisValue)
+
+    map() 方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。
+    语法：array.map(callback[, thisArg])
+    callback
+    原数组中的元素经过该方法后返回一个新的元素。
+    currentValue
+    callback 的第一个参数，数组中当前被传递的元素。
+    index
+    callback 的第二个参数，数组中当前被传递的元素的索引。
+    array
+    callback 的第三个参数，调用 map 方法的数组。
+    thisArg
+    执行 callback 函数时 this 指向的对象。
+
+
+
+
+
+    charAt() 方法可返回指定位置的字符。
+    请注意，JavaScript 并没有一种有别于字符串类型的字符数据类型，所以返回的字符是长度为 1 的字符串。
+    语法：stringObject.charAt(index)
+    字符串中第一个字符的下标是 0。如果参数 index 不在 0 与 string.length 之间，该方法将返回一个空字符串。
+
+    charCodeAt() 方法可返回指定位置的字符的 Unicode 编码。这个返回值是 0 - 65535 之间的整数。
+    方法 charCodeAt() 与 charAt() 方法执行的操作相似，只不过前者返回的是位于指定位置的字符的编码，而后者返回的是字符子串。
+    语法：stringObject.charCodeAt(index)
+    字符串中第一个字符的下标是 0。如果 index 是负数，或大于等于字符串的长度，则 charCodeAt() 返回 NaN。
+
+    fromCharCode() 可接受一个指定的 Unicode 值，然后返回一个字符串。
+    语法：String.fromCharCode(numX,numX,...,numX)
+    该方法是 String 的静态方法，字符串中的每个字符都由单独的数字 Unicode 编码指定。
+    它不能作为您已创建的 String 对象的方法来使用。因此它的语法应该是 String.fromCharCode()，而不是 myStringObject.fromCharCode()。
+
+    indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+    语法：stringObject.indexOf(searchvalue,fromindex)
+    该方法将从头到尾地检索字符串 stringObject，看它是否含有子串 searchvalue。开始检索的位置在字符串的 fromindex 处或字符串的开头（没有指定 fromindex 时）。
+    如果找到一个 searchvalue，则返回 searchvalue 的第一次出现的位置。stringObject 中的字符位置是从 0 开始的。
+    注释：indexOf() 方法对大小写敏感！
+    注释：如果要检索的字符串值没有出现，则该方法返回 -1。
+    
+    lastIndexOf() 方法可返回一个指定的字符串值最后出现的位置，在一个字符串中的指定位置从后向前搜索。
+    语法：stringObject.lastIndexOf(searchvalue,fromindex)
+    返回值
+    如果在 stringObject 中的 fromindex 位置之前存在 searchvalue，则返回的是出现的最后一个 searchvalue 的位置。
+    该方法将从尾到头地检索字符串 stringObject，看它是否含有子串 searchvalue。开始检索的位置在字符串的 fromindex 处或字符串的结尾（没有指定 fromindex 时）。
+    如果找到一个 searchvalue，则返回 searchvalue 的第一个字符在 stringObject 中的位置。stringObject 中的字符位置是从 0 开始的。
+    注释：lastIndexOf() 方法对大小写敏感！
+    注释：如果要检索的字符串值没有出现，则该方法返回 -1。
+
+    slice() 方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。
+    语法：stringObject.slice(start,end)
+    一个新的字符串。包括字符串 stringObject 从 start 开始（包括 start）到 end 结束（不包括 end）为止的所有字符。
+    String 对象的方法 slice()、substring() 和 substr() （不建议使用）都可返回字符串的指定部分。
+    slice() 比 substring() 要灵活一些，因为它允许使用负数作为参数。slice() 与 substr() 有所不同，因为它用两个字符的位置来指定子串，而 substr() 则用字符位置和长度来指定子串。
+    还要注意的是，String.slice() 与 Array.slice() 相似。
+
+    split() 方法用于把一个字符串分割成字符串数组。
+    语法：stringObject.split(separator,howmany)
+    一个字符串数组。该数组是通过在 separator 指定的边界处将字符串 stringObject 分割成子串创建的。返回的数组中的字串不包括 separator 自身。
+    但是，如果 separator 是包含子表达式的正则表达式，那么返回的数组中包括与这些子表达式匹配的字串（但不包括与整个正则表达式匹配的文本）。
+    注释：如果把空字符串 ("") 用作 separator，那么 stringObject 中的每个字符之间都会被分割。
+    注释：String.split() 执行的操作与 Array.join 执行的操作是相反的。
+
+    substr() 方法可在字符串中抽取从 start 下标开始的指定数目的字符。
+    语法：stringObject.substr(start,length)
+    一个新的字符串，包含从 stringObject 的 start（包括 start 所指的字符） 处开始的 length 个字符。如果没有指定 length，那么返回的字符串包含从 start 到 stringObject 的结尾的字符。
+    注释：substr() 的参数指定的是子串的开始位置和长度，因此它可以替代 substring() 和 slice() 来使用。
+    重要事项：ECMAscript 没有对该方法进行标准化，因此反对使用它。
+    重要事项：在 IE 4 中，参数 start 的值无效。在这个 BUG 中，start 规定的是第 0 个字符的位置。在之后的版本中，此 BUG 已被修正。
+
+    substring() 方法用于提取字符串中介于两个指定下标之间的字符。
+    语法：stringObject.substring(start,stop)
+    一个新的字符串，该字符串值包含 stringObject 的一个子字符串，其内容是从 start 处到 stop-1 处的所有字符，其长度为 stop 减 start。
+    substring() 方法返回的子串包括 start 处的字符，但不包括 stop 处的字符。
+    如果参数 start 与 stop 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。如果 start 比 stop 大，那么该方法在提取子串之前会先交换这两个参数。
+    重要事项：与 slice() 和 substr() 方法不同的是，substring() 不接受负的参数。
+
+
+
+    trim()去空格
+
+
+    includes()
+
+    endsWith(s)  以什么结尾 ，以s结尾返回true
+    startsWith() 以什么开始
+
+    toUpperCase()     toLowerCase()
+
+
+    replace()替换
+
+    match()
+
+    search()
+
+
+
+    Math.ceil()向上取整
+    Math.random()随机数
+    Math.abs()绝对值
+    Math.round()四舍五入
+    Math.max()
+    Math.min()
+    Math.pow(2,3)幂次方
+    Math.sqrt()开平方
+    Math.sign()  正数返回1，负数返回-1,0返回0，-0返回-0，其他NaN
+    Math.trunc()取整（和向下一样）

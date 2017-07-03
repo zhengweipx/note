@@ -1,0 +1,61 @@
+媒体查询
+@media screen and (max-width:600px){}(检测屏幕最大宽度是否=<600，是执行代码)
+
+阈值（临界值）
+0~750小屏   750~992中屏   992~1200大屏
+
+<link rel="" href="" media="screen and (max-width:600px)">
+
+
+大屏(lg) 1200以上     1170(内宽)
+中屏(md) 992-1200     970
+小屏(sm) 768-992      750
+超小屏(xs)   768      100%
+
+12栅格化
+每份 8.333%    container  row  col
+col-offset
+
+
+一个元素不设置宽度和设置宽度是100%基本是一样的，这个元素的宽度是它父元素内容部分的宽度。
+1.但是如果没有设置宽度，或者是宽度是自动的，如果加了margin负值，那么这个元素的宽度会扩大。
+2.但是如果设置了100%，那么宽度不变。
+
+
+
+
+
+移动端
+
+ipconfig  IP配置   http-server
+
+viewport 视口
+是设备的屏幕上能用来显示我们的网页的那一块区域
+
+layout viewport 布局视口
+visual viewport 视觉视口
+ideal viewport 理想视口
+<meta name="viewport" content="" user-scalable="no">
+屏幕750*1334
+软件375*667  （逻辑像素/css像素/独立像素）
+devicePixelRatio =物理像素/逻辑像素（dpr）
+dpi物理像素分辨率
+
+3种布局方式
+1.百分比布局
+2.rem布局
+em取得是当前字体大小的倍数
+rem是根元素字体大小的倍数
+3.flex布局（弹性布局）
+
+<a href="tel=51555"></a>
+<a mailto=""></a>
+
+移动端字体大小12px
+
+
+设为Flex布局以后，子元素的float、clear不管用
+
+order值越小越靠前
+
+

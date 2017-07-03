@@ -1,0 +1,86 @@
+数据库
+关系型数据库：mysql
+非关系型数据库：Nosql=Not Only SQL
+
+mysql是一种数据库服务器，提供某些特定功能，提供数据的管理和操作
+基本构成点:
+1.数据库服务器
+2.数据库
+3.数据行（指一条数据）
+4.数据列（指字段）
+5.数据表
+
+sql (structured)(query)(l ) 格式化的查询语句
+
+insert
+delete
+updata
+select
+
+sql领导php
+排序规则：utf8_general（简体中文）_ci（不区分大小写）
+
+
+属性：SINARY()/UNSIGNED
+索引
+主键（PRIMARY）：非空的唯一的
+UNIQUE(唯一的，值不能重复)
+
+sql、机器语言不区分大小写
+$db=new mysqli('localhost','root','',库名);
+$sql="insert into 表 (字段) VALUES (),('')";  插入  字段可以自增，为空-》可以不插入
+$db->query('set names utf8');
+$db->query($sql);
+$db->close();
+
+$sql="select * from admin;
+$row=$result->fetch_array(MYSQLI_ASSOC（关联数组）/MYSQLI_NUM（索引数组）/MYSQLI_BOTH（都取）/null)  将结果集里去抓取一行数据把它转化成数组
+$row=$result->fetch_assoc();从结果集里抓取一行数据把它转化为关联数组;
+$row=$result->fetch_all(MYSQLI_ASSOC（关联数组）/MYSQLI_NUM（默认）/MYSQLI_BOTH（都取）);从结果集里抓取所有数据把它转化为数组; 
+
+删除数据
+$sql="delete from 表名"
+
+更新数据
+$sql="update one set sex='男' where id=5";
+
+json_encode($row)  把数组转化为json格式的字符串
+ 
+
+选择
+$sql="select * from admin where 。。;
+where条件可写类型 ：= != > < >= <=
+连接符：and 
+or
+between    WHERE id BETWEEN 1 and 3
+WHERE id in(1,5)  选出id是1,5的
+
+排序：
+WHERE pid=2 ORDER BY num ASC,shopprice DESC    排序   ORDER BY 不能写在WHERE前面
+where 条件 order by 字段，字段  （前面优先）
+
+结果限制
+limit n,m   写在最后，从第(n+1)开始取，取m个
+
+模糊查询
+WHERE name like "%电脑"  %代表n个字符    _  代表1个字符
+
+函数 
+count avg max min sum 
+
+//7、 子查询
+//where型子查询
+//$sql1="select id,name from goods WHERE price=(SELECT MAX(price) from goods)";//第一次查询结果只有一行的时候
+//$sql1="select id,name from goods WHERE price in (SELECT price from goods WHERE num=30)";//第一次查询结果有多行的时候
+
+//from型子查询
+//$sql1="select id,name from (SELECT * from goods where pid=2) as linshi";
+
+
+多表查询
+内连接 inner join
+左连接 left join
+右连接 right join
+
+
+affected_rows

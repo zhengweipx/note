@@ -1,0 +1,730 @@
+php是一种超文本预处理语言，是一种弱类型语言,动态的服务器语言。
+运行环境：服务器环境下运行
+apache（阿帕奇）里边包含了php模块，所以阿帕奇能解析运行php
+apache（web服务器）给我们提供的是http所有相关的功能以及解析php的功能
+http是在TCP/IP的基础上实现的
+服务器和数据库没关系，其实是php在操作数据库
+phpMyAdmin
+浏览器功能：绘画功能，将html、css写出来的东西画到页面中，js是用来指挥绘画的，并且向服务器发送http请求
+1.请求是由两部分构成的，一部分是请求头信息，另一部分是请求体
+请求的资源分为两种，一种动态资源（服务器经过处理后返回），一种静态资源（服务器会直接返回）
+2.只要你请求的后缀名不是php它会将这些东西直接返回，如果是先解析然后把php的结果返回去
+3.浏览器接收到返回的数据后开始进行绘制，当碰到link、script标签的时候也会再次向服务器发送请求，请求script和css，
+碰到img标签同样也会发送请求，请求图片，
+在解析css的时候，遇到背景图片同样也会发送请求，去请求背景图片，
+在解析js的时候，碰到ajax，同样也会发送请求，请求数据，
+在这个过程中，不断的发送请求，直到整个页面呈现出来，客户端和服务器就没关系了。
+
+
+echo 输出字符串，只要输出标量就不会错
+var_dump()az
+写法：
+<ul>
+	<?php if($i>2):?>
+	<li>das</li>
+	<li>zxczx</li>
+	<?php endif;?>
+</ul>
+
+
+
+header("Content-type:text/html;charset=utf8");（解决php中文乱码，一般放最上面）
+php里+没有连接的意思，连接用.，通常连接字符串
+$obj->fun();调用
+echo "我是php输出语句{$nub}"    双引号可以解析识别这个变量
+unset($nub);  删除一个变量
+
+
+echo gettype($nub)=="boolean"
+is_int()
+is_string()
+is_float()
+is_null()
+is_resource()
+is_array()
+is_object()
+is_bool()
+var_dump(is_int($nub));检测是不是这个类型
+
+类型的转换：
+$nub=123;
+1.var_dump( (string)$nub );   强制转换为string
+2.var_dump( strval($nub) );   intval()  boolval()
+3.settype(要操作的变量,要变成的类型);   不建议使用，它会改变原有的数据类型
+settype($nub,"bool");
+
+算数运算符：+ - * / % ++ --
+逻辑运算符：&& || !   and or   结果一定是一个bool类型
+假：0、0.0、""、"0"、array()、null 
+比较运算符：<> 不等于 
+赋值运算符：+= -= *= /= %= .=
+隐士类型转换：字符串类型和int类型  ，会将字符串转化为int类型；
+			  int类型和float类型 ，会将int转换为float
+
+字符串方法：
+strlen($str)   用来返回某个字符串的长度
+trim()         去空格
+$str="@dadasda@";
+echo trim($str,'@') 去除@
+
+ltrim()
+rtrim()
+strtolower()  转化为小写
+strtoupper()  转化为大写
+ucfirst()     将字符串的第一个字母大写
+ucwords()     将字符串的每一个单词的首字母大写
+strrev()      反转
+md5()         加密
+number_format()   格式化、国际化形式表示
+$nub=1232456.123
+echo number_format($nub,2,-,*)  要操作的变量，保留小数的位数，小数点方式，每3位数分割符（要么1个参数要么4个）
+explode()     将字符串切割为数组，像split	
+explode(分隔符，要操作的字符串，数组的长度)
+implode()     将数组连接为字符串，像join
+implode(连接的字符，要操作的数组)
+substr()      截取
+echo substr($str,0,4);
+strpos()      返回指定字符首次出现的位置
+$str="abc";
+echo strpos($str,c)
+strrpos()     返回指定字符最后出现的位置
+str_replace() 替换
+str_replace(要找的字符，要替换成的字符，要操作的字符串)
+str_repeat()  将指定的字符串重复n次
+str_repeat(要重复的字符串，次数)
+
+
+
+
+数组：关联数组、索引数组
+$arr=array('a','b','c');
+var_dump($arr);
+
+遍历
+$arr=array(
+	'name'=>'lisi',
+	'age'=>'23',
+);
+foreach($arr as $item=>$value){
+	echo $item.":".$value.'<br>';
+}
+
+$arr=array(
+	'name'=>'lisi',
+	'age'=>'23',
+);
+var_dump(each($arr));多次调用each往下取值，获取不到返回false,数组指针往后移一位
+
+while($row=each($arr)){
+	echo "$row[0]:$row[1]<br>";
+}
+
+next($arr)  下一个数组指针
+prev($arr)  上一个数组指针
+
+
+$arr=array('a','b','c');
+list($a,$b,$c)=$arr;          list只能用在索引数组,list里的第一个参数一定会找下标0
+echo $a,$b,$c;  (abc)
+
+不能正常的解析加{}
+list类似js的解构赋值，但是list一定会找相对应的从0开始的下标，一一对应然后赋值
+
+
+in_array(判断的字符，数组)   判断某一个值是否包含在数组里，返回结果是bool类型
+array_search(判断的字符，数组)    判断某一个值是否包含在数组里，存在返回结果是键，不存在返回false;
+array_key_exists(要找的键，数组)     判断某一个键是否包含在数组里，返回bool类型值;
+array_filter(数组，function($value){    返回筛选后的参数，接收两个参数（数组，回调函数），回调函数接收一个参数为数组的值，
+										返回bool类型，如果返回true，当前值被保留，返回false当前值不会保留
+	return true;
+})    
+
+array_walk(数组，function(&$value,$item){    数组里的每一个值都会执行这个函数，返回bool类型，回调函数接收两个参数，
+											 一个值，一个键，所有的操作都不会影响原数组，如果要和原数组相关可以使用数组的引用
+	$value=$value."new";
+	echo $value.'<br>';
+})    
+
+array_map(function($value){    执行数组映射，返回新数组，同样接收回调函数
+	return $value."new";
+},$arr);   
+
+array_push($str,str)    在数组末尾添加，返回值为新数组的长度
+array_pop()             在数组末尾删除，返回值为删除的元素
+array_shift()           在数组开头删除
+array_unshift()         在数组开头添加
+
+
+array_keys($arr)    返回键组成的数组
+array_values($arr)  返回值组成的数组
+array_sum($arr)     求和
+array_merge($arr1,$arr2)       合并数组,如果是关联数组，存在键相同，那么后面的值会覆盖前面的值;
+range(1,10)             生成数组1~10
+echo "<pre>";
+print_r(range(1,10));
+
+array_unique()      去除数组里的重复值，但是键不变
+array_rand($arr,1)  两个参数（数组，int类型值）1返回随机的一个键，>1返回键数组
+sort()          升序，以ascll码或值的大小排序，会破坏原有的数组，破坏原有的键
+rsort()         降序
+asort()         升序，保存原来的键进行排序
+arsort()        降序
+ksort()         升序，以键进行排序
+krsort()       
+
+
+mt_rand(5,10)    获取5~10的随机整数
+
+
+函数名字不能直接赋值给某一个变量，所以在需要回调函数的时候，传函数不能直接传函数名，
+可以传函数名字的字符串，利用php可以去运行变量的特性来使用。
+但匿名函数可以直接赋值给某一个变量。
+
+
+可变函数                          
+function fun(){
+	echo "洒家";
+}
+$str='fun';
+$str();
+
+
+
+函数的参数
+函数的形式参数不能大于实参
+
+function fun(){
+	echo func_num_args();      返回实参的个数
+	var_dump(func_get_args()); 返回数组
+	var_dump(func_get_arg(1)); 
+}
+fun(1,2,3);
+
+
+参数的引用问题：
+$nub=200;
+    function fun($a){//&$a
+        $a=300;
+        echo $a;
+    }
+    fun($nub)
+    echo $nub;
+
+function fun($b,$nub=200,$a='abc'){
+	echo $nub+$a;
+}
+fun(1);
+
+
+静态变量  （用static声明）
+ 
+function fun(){
+	static $i=0;    static不会在函数运行结束的时候被销毁
+	$i++;
+	echo $i;
+}
+fun();  1
+fun();  2
+fun();  3
+fun();  4
+
+
+函数内部的变量只能在内部使用，外部的变量只能在外部使用
+
+
+1.全局变量是不能在局部变量里访问到的，如果你想在局部里访问全局变量，可以用$GLOBALS
+$GLOBALS['nub']=300;  
+2.global $nub; 声明$nub是外部的全局变量，先声明，再使用
+
+
+
+
+
+
+
+
+
+
+
+
+php数据类型：4种标量(int/float/string/bool);
+
+2种复合类型(数组/对象)，数组分为两种：索引、关联，对象需要实例化类;
+2种特殊类型：null/resource
+
+phpcms(基于php的网站内容管理系统)
+前台入口：localhost/install_package/index.php
+后台入口：localhost/install_package/admin.php
+
+首页->一级导航->列表页->详情页面
+index->category->list->show
+{pc:content action='category' catid='0'(为0操作所有栏目) num='25'(取回的数据最大25) sitelid, order='listorder ASC(升序) /DESC(降序)' }
+	{loop $data $v}
+
+	{/loop}
+{/pc}
+取回来的数据全部保存在$data上 ，每次循环后的数据都保存在$v
+
+pc标签定义你究竟要干什么事情
+
+thumb 缩略图
+
+JSON_encode
+
+
+
+1.购买域名   SVN checkout 导入本地
+2.把整个网页的文件全部上传到服务器上
+3.创建网上数据库，点开网上phpadmin，到本地导出整个网站的数据库，查找里面所有的localhost全部替换为刚刚构建的域名
+4.上传完成配置database.php/system.php这两个配置文件，system.php首先所有的localhost全部替换为刚刚构建的域名
+database.php里数据库地址、名字、用户名、密码、端口都改，所有更改发布到网上
+
+
+php 函数大小写不敏感
+
+变量：和js命名规范一样 ，大小写敏感，不用声明  
+可变变量：当一个变量的名字用了另一个变量的值 
+		$nub="aa"; $$nub=123; echo $aa;
+变量的引用：
+$nub=200;
+$aa=&$nub;          $nub 发生变化，$aa 也会跟着变化
+$nub=300;
+echo $nub,$aa;
+
+外部变量（超全局变量）：可以在任何位置去使用
+$_GET   $_POST  $_REQUEST(不管是GET/POST,都可以访问)
+$_SESSION     存在服务器端的
+$_COOKIE      和js一样，存在浏览器端
+$_SERVER      存放着当前php运行环境里的一些数据
+$_FILES
+
+ <form action="1ceshi.php" method="get">
+    账户:<input type="text" name="zhanghao">
+    密码：<input type="password" name="pass">
+    <button>提交<tton>
+</form>
+
+function fun(){
+ 	$zhanghao=$_GET['zhanghao'];
+	$pass=$_REQUEST['pass'];
+	echo $zhanghao,$pass;
+}
+fun();
+var_dump($_GET);
+var_dump($GLOBALS);
+
+
+
+
+
+
+
+
+
+常量
+1.define("MAX",1213)  常量名字(一般大写)，常量值（只能是标量）
+不能以$开头，大小写敏感
+常量不在某一个类中定义，也不在某个函数中定义，在全局中定义，可以在任何位置访问到
+2.const（一般定义在类中或函数里）
+
+魔术常量（两个下划线开头的是魔术常量）：
+$_POST;$_SERVER;
+echo __FILE__;  返回当前文件的路径和文件名
+echo __DIR__;   返回当前文件的路径
+echo __LINE__;  返回当前代码的所在行
+function fun(){
+	echo __FUNCTION__;  返回当前函数的函数名
+}
+fun();
+
+echo __METHOD__;   返回当前类里的方法名
+echo __CLASS__;    返回当前类名
+
+变量设置否：
+$nub=null;   相当于空，没设置
+isset(); 看设置了没，设置了true
+var_dump(isset($nub));
+
+常量设置否：
+define("MAX",1213);
+var_dump(defined("MAX"));
+
+
+
+
+php能够操作文件，路径，时间，能够生成图片（验证码）,还可操作session、cookie，可以去操作数据库
+
+date_default_timezone_set('Asia/Shanghai');  设置时区
+date_default_timezone_get();
+var_dump(getdate());  获取当前时间
+
+echo microtime();//从1970年到现在经历的微秒数，显示的时候是以秒的单位表示的||当前经历的秒数
+$mtime=microtime();
+$arr=explode(' ',$mtime);
+echo $arr[0]+$arr[1];//秒
+echo microtime(true);//浮点的形式
+
+格式化时间
+$time=time();
+echo date("Y/m/d H:i:s",$time);
+
+
+//a:   "am"或是"pm"
+//* A:   "AM"或是"PM"
+//* d:   几日，两位数字，若不足则补零；从"01"至"31"
+//* D:    星期几，3个英文字母，如:"Fri"
+//* F:    月份，英文全名，如:"January"
+//* h:    12小时制的小时，从"01"至"12"
+//* H:    24小时制的小时，从"00"至"23"
+//* g:    12小时制的小时，不补零；从"1"至"12"
+//* G:    24小时制的小时，不补零；从"0"至"23"
+//* j:    几日，不足不被零；从"1"至"31"
+//* l:    星期几，英文全名，如："Friday"
+//* m:    月份，两位数字，从"01"至"12"
+//* n:    月份，两位数字，不补零；从"1"至"12"
+//* M:    月份，3个英文字母；如："Jan"
+//* s:   秒；从"00"至"59"
+//* S:    字尾加英文序数，两个英文字母,如："21th"
+//* t:    指定月份的天数，从"28"至"31"
+//* U:    总秒数
+//* w:    数字型的星期几，从"0(星期天)"至"6(星期六)"
+//* Y:    年，四位数字
+//* y:    年，两位数字
+//* z： 一年中的第几天；从"1"至"366"
+
+
+include("xx.php") 可以将xx.php引到当前的php，是整个项目更加清晰明了
+include_once()    先检测有没有引入，如果有不引，没有再引入。
+
+require("xx.php") 和include一样，但是一旦require引入的文件和路径失败，整个程序就会结束
+require_once() 
+
+
+session(翻译为绘画)
+cookie 存储小，安全性小，不能跨域
+
+setcookie(name,value,time);键，值，过期时间
+var_dump($_COOKIE);
+
+数据库
+$db=new mysqli('localhost','root','',库名);
+
+$db->autocommit(false);    //关闭自动提交
+
+
+$sql="select * from admin WHERE user='$user'"; 
+$result=mysqli_query($db,$sql);
+$row=mysqli_fetch_array($result); //结果集处理
+
+$db->rollback(); //回滚
+
+
+session：
+session_start();  整个页面只能写一个
+$_SESSION['zhanghao']='lisi';
+$_SESSION['pass']='123';
+var_dump($_SESSION);
+unset($_SESSION['zhanghao']) 用于释放一个已经存在的session值.
+
+
+构造函数的作用：为了提供对象的初始化。
+面向对象的3部分组成：
+1.面向对象的设计
+2.面向对象的构建
+3.面向对象的编程
+
+面向对象3个特点：继承、封装、多态。
+继承：用一个类去继承另一个类，提高代码的复用性。
+
+封装性：public    protected受保护的      private私有的     static 静态的      final 
+
+多态性： 覆盖、重载
+用这个类构建出来的不同的对象调用同一个函数产生的结果不同就是多态
+
+class Person{
+
+	<!-- 成员变量 -->
+	<!-- public $name='lisi'; -->
+	const MAX=123;
+	public $name;
+	<!-- 成员方法（用关键字声明某一个变量） -->
+	public function __construct($a,$b){
+	<!-- $this 只能在函数里使用，谁实例化对象指的就是谁 -->
+	$this->name=$a;
+}
+	public function fun($a){
+	echo "I am fun $a";
+}
+
+	public static function fu(){
+
+}
+	
+}
+<!-- 构造函数会在对象创建的时候被自动调用 -->
+$obj=new Person('lisi');
+var_dump($obj->name);                   php里对象调用属性用->
+$obj->fun();
+
+在类里定义一个常量叫类常量，这个常量属于类而不属于对象。
+要用作用域操作符去使用
+echo Person::MAX;
+类的内部一般用self::MAX;   self这种访问方式只能访问当前类的静态属性、静态方法和常量
+
+public static $b=2;    静态static一般和其他的配合使用，属于类
+echo Person::$b;   self::$b;
+在静态方法里不能使用非静态属性，只能访问静态属性、方法、类常量。
+非静态方法可以访问静态属性、方法和类常量。	
+
+
+继承
+php是单继承 ，一个类不能同时继承多个类
+如果类是public修饰的，在哪都可以访问
+private仅仅在父类使用
+protected子类可以使用，外部不可使用
+当子类的方法和父类的方法重名的时候，子类的方法会覆盖掉父类的方法
+调用父类的方法、变量、常量可以用parent::
+静态的必须以类的方式访问
+静态的方法只能用静态的属性
+不能用对象去调用静态属性（可以调用静态的方法，一般都不这样使用）
+
+class Person{
+	public $name;
+
+}
+class Student extends Person{	
+	public function __construct($a,$b){
+		<!-- $this 只能在函数里使用，谁实例化对象指的就是谁 -->
+		parent::__construct($a,$b);      调用父类的构造函数
+		$this->name=$a;
+	}
+	public function learn(){
+		
+	}
+}
+
+读取文件
+$url='xx.txt';
+1.readfile($url);
+2.file_get_contents($url);                     写 file_put_contents($url,'dsda') 内容替换
+3.四步操作：
+①打开文件;
+②读取文件;
+③写入文件;
+④关闭文件
+
+fopen(文件名,打开方式) 打开路径opendir
+打开方式6种：r r+ w w+ a a+    
+读   r+（读写的方式打开，文件的指针指在文件开头处，会从指针处开始替换掉原来的字符）  
+w（以写的方式打开，文件大小被截取为0，文件指针指向文件开头处）
+w+（读写的方式打开，文件大小被截取为0，文件指针指向文件开头处）  
+w/w+如果文件不存在则尝试创建
+a(只写，文件的指针指向文件结尾)
+a+(读写，文件的指针指向文件结尾)
+
+文件的大小$size=filesize($url);
+fread(处理的文件，读的长度(字节));
+fgetc(每次只读一个字节，到最后没有的话返回false)
+fgets(一次读一行，到最后没有的话返回false)
+
+<!-- fwrite(处理的文件,'新的内容'); -->
+fcolse(处理的文件)
+
+fseek($file,10)   指定指针的位置
+rewind($file)    重置指针，指针指向0
+
+is_file($url) 判断是否是文件
+is_dir()     判断是否是一个目录，用./表示当前目录，如果以当前目录去查找可以识别，
+但如果不是当前相对路径可能会有问题
+
+
+$filearr=scandir($path);//读取目录下的所有文件（参数：路径）
+read_dir()   读目录（1次）
+rename(旧文件名，新名)     修改文件名、目录名
+copy(文件名,url)        复制
+unlink(文件名)         删除文件
+rmdir(目录)            删除目录
+file_exists(文件名);     判断文件/目录有没有
+mkdir(目录名)     创建目录
+
+
+
+pathinfo($path);  dirname (文件路径) basename(文件名.后缀名)   extension(文件后缀名)  filename(文件名)
+ 
+传文件
+<form action="" method="post" enctype="multipart/form-data">
+	<input type="file" name="file">
+</form>
+
+$file=$_FILES['file'];
+name(上传的文件名)
+type(上传文件的格式) mime格式
+tmp_name(上传文件临时存储地址)
+error=>0(表示上传成功)
+size(文件大小)
+
+
+
+
+
+date_default_timezone_set('Asia/Shanghai');
+$file=$_FILES['file'];
+$typearr=array(
+	'image/png'=>'png',
+	'image/gif'=>'gif',
+	'image/jpeg'=>'jpg',
+)
+$size=20*1024*1024;
+$path="";
+if($file['error']==0){
+	$ex=explode('.',$file['name'])[1];
+	$type=$file['type'];
+	if(in_array($ex,$typearr)&&array_key_exists($type,$typearr)){
+		
+		if($size>=$file['size']){
+		 	$name=time().".$ex";
+			if(!file_exists($path)){
+				mkdir($path);
+			}
+			if(is_uploaded_file($file['tmp_name'])){
+				move_uploaded_file($file['tmp_name'],$path.'/'.$name);
+			}
+		}else{
+			echo '文件过大！';
+		}
+	}else{
+		echo '文件格式不正确';
+	}
+	
+}else{
+	echo '上传失败'
+}
+
+
+画图
+header("Content-type:image/png);
+<!-- 创建图片 -->
+$img=imagecreate(width,height);
+<!-- 创建和图片相关的颜色，最终返回颜色 -->
+$red=imagecolorallocate($img,255,0,0);
+<!-- 填充整个图片背景色 -->
+imagefill($img,0,0,$red);   
+<!-- 画线 -->
+imageline($img,0,0,200,100,$red); ($img,开始x,开始y,结束x,结束y,颜色)
+<!-- 画点 -->
+imagesetpixel($img,x,y,颜色)
+<!-- 画文字 -->
+1.imagettftext(操作的图片，文字大小，角度，x，y，颜色，字体文件，要画的文字)
+2.imagechar()
+3.imagestring()
+<!-- 输出图片 -->
+imagepng($img)
+<!-- 销毁图片 -->
+imagedestroy($img)
+
+
+function getcolor($img,$type='q'){
+	if($type=='q'){
+		$min=130;
+		$max=240;
+	}else if($type=='s'){
+		$min=10;
+		$max=120;
+	}
+	return imagecolorallocate($img,mt_rand(min,max),mt_rand(min,max),mt_rand(min,max));
+}
+
+
+
+web1.0 
+web2.0  
+web3.0 2010年
+
+angular   Vue   nodejs
+
+
+
+web编程 体系     浏览器语言（html+css+js+xml+svg表示图形）、服务器语言（php+java+.net+nodejs+p）
+nodejs  小巧快速
+渲染器，解析html+css  -webkit-  -o-  -ms-  -moz-  
+解析javaScript   v8引擎->谷歌（科技创新性的公司   阿里）
+
+协议 ： file://（在本机进行）   http://  https://   ftp:// （和服务器进行文件的交换）   git://   svn://
+服务器：封装了http协议的所有细节，能够对用户的请求做响应。
+php  基于函数     处理文件、数据流、数据库  操作图形图像、http->apache
+后台考验的是统筹能力，前台拓展能力。	
+<!-- matrix    -->
+
+单入口文件   违背php意志
+路径 ：文件路径（c:/）  服务器路径（http://）
+
+
+<!-- //项目运行的根目录 -->
+define("ROOT_PATH",substr($_SERVER['SCRIPT_FILENAME'],0,strrpos($_SERVER['SCRIPT_FILENAME'],"/")+1));
+<!-- //引擎文件夹 -->
+define("LIB_PATH",ROOT_PATH."lib/");
+
+<!-- //模块文件夹 -->
+define("MODULE_PATH",ROOT_PATH."modules/");
+
+<!-- //服务器根目录 -->
+define("HTTP_PATH","http://".$_SERVER['SERVER_NAME'].substr($_SERVER['SCRIPT_NAME'],0,strrpos($_SERVER['SCRIPT_NAME'],'/')+1));
+
+<!-- //当前运行的文件 -->
+define("SELF_PATH","http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']);
+
+<!-- //static目录 -->
+define("STATIC_PATH",HTTP_PATH."static/");
+
+<!-- //css目录 -->
+define("CSS_PATH",STATIC_PATH."css/");
+
+<!-- //img目录 -->
+define("IMG_PATH",STATIC_PATH."img/");
+
+<!-- //js目录 -->
+define("JS_PATH",STATIC_PATH."js/");
+
+echo STATIC_PATH."<br>",CSS_PATH."<br>",IMG_PATH."<br>";
+
+
+路由?kjk=jk
+class_exists
+
+
+MVC   model    view    controller       划分3层架构，通过控制器将相应的数据呈现在相应的视图
+
+控制器：要控制相应的数据在相应的视图里面呈现
+
+MVC是一种编程架构，用它主要是要前后台分离，能够让专业的人员干专业的事，
+便于代码维护，控制器是关键，实现控制器的方法有好多，目前路由a  
+
+面向对象    高内聚  低耦合
+
+数据就是模型
+
+
+单入口文件优点：
+1.项目的安全  2.便于管理  3.前后台分离  4.共享数据
+
+
+smarty   简洁
+
+基于MVC	架构的php框架，完成一个项目基础设施的一个架构
+php本身就是一种优秀的模版引擎
+
+
+狭义：指的是具有用户权限能够操作的功能
+
+http协议 是无状态的协议    三次握手，四次挥手
+url 是在互联网中唯一的资源标识符
+session_start();开启之前不能有任何输出	
+
+
+
+把带length的json格式转化为数组：
+Array.prototype.slice.call(this.files);
+
+
+事务性操作：
+一个事物需要多个步骤来实现

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script>
+// 倒序
+	let arr=["a","b","c","d"]
+	function reverse(arr){
+		let brr=[]
+		for(let i=arr.length-1;i>=0;i--){
+			brr.push(arr[i])
+		}
+		console.log(brr)
+	}
+	reverse(arr)
+// 最大值
+	let aa=[2,3,5,8,9];
+	function max(aa){
+		let max=aa[0];
+		for(let i=0;i<aa.length;i++){
+			if(aa[i]>max){
+				max=aa[i];
+			}
+		}
+		console.log(max)
+	}
+	max(aa)
+// 最小值
+   let bb=[2,3,5,8,9];
+	function min(aa){
+		let min=bb[0];
+		for(let i=0;i<aa.length;i++){
+			if(aa[i]<min){
+				min=aa[i];
+			}
+		}
+		console.log(min)
+	}
+	min(bb)
+	// 求圆的面积
+	function cir(r){
+		console.log(Math.PI*Math.pow(r,2))
+	}
+	cir(10)
+	// 求n~m之间数据的和
+	function add(n,m){
+		let num=0;
+		for(let i=n;i<=m;i++){
+			num=num+i;
+		}
+		console.log(num)
+	}
+	add(2,5)
+	// 输入一个整数，求位数
+	function digit(a){
+		if (a==Math.trunc(a)) {
+			let b=String(a);
+			console.log(b.length);
+		}else{
+			console.log("请输入整数")
+		}
+	}
+	digit(12)
+	// 编写一个函数，求n！
+	function fun(n){
+		return n>1?n*fun(n-1):1;
+	}
+	console.log(fun(5))
+	
+</script>
+<body>
+	
+</body>
+</html>

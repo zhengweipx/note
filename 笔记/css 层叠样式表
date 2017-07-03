@@ -1,0 +1,165 @@
+css 层叠样式表
+cascading style sheets
+补充HTML缺陷  HTML+CSS布局方式又称div+css
+
+div 分割 
+无意义的标签<div></div>   <span></span>
+弥补了HTML功能缺陷；
+适应潮流；
+加快页面的访问速度；
+实现内容和样式的分离，便于维护和管理；
+更利于搜索引擎搜索
+
+四种引入方式：
+    1.行内样式表引入方式 (优先级最高)
+    <div style="width:200px;height:200px;background:red"></div>	
+    2.嵌入样式表引入方式（与外部优先级一样，需要按引入页面的先后顺序决定）
+    <style>
+    div{
+    	width: 200px;
+    }
+    </style>
+    3.外部样式表引入方式
+    <link rel="stylesheet" type="text/css" href="">
+    4.@import url("")
+  
+ 选择器(优先级:id>类名>标签  越具体，优先级越高)
+     1.标签选择器
+     div{}
+
+     2.类名选择器
+     <div class="div1">
+     类名不能数字开头
+     .div1{}
+
+     3.id选择器
+     <div id="id1">
+     #id1{}
+
+     4.后代选择器
+     div p{} 选中div里面所有p标签
+
+     5.交叉选择器
+     div.div1{}  标签.类名   标签#id
+
+     6.伪类选择器
+     div:hover{}  鼠标放上去的状态(简单的交互)
+     active 
+    
+     7.群组选择器
+     div,p{}  选中div和p
+     
+     px,em,rem单位
+
+     rgb(0,0,0)黑色
+
+     font-size:字体大小
+
+     font-family:"宋体","微软雅黑","黑体" 字体（有宋体用宋体，没往后推）
+
+     font-style:italic(斜体)
+
+     font-weight:normal/bold(加粗)
+
+     text-decoration:underline（下划线）overline(上划线) line-through(删除线) none（无）
+
+     text-indent:20px;(缩进)
+
+     text-transform：uppercase(小写换大写) lowercase（大写转小写）capitalize(首字母大写)
+
+     text-align:left,center,right;
+
+     letter-spacing:5px;(字间距)
+
+     line-height:5px;(行间距) 单行文字居中大小调到盒子的高度
+
+     <br/>换行标签
+
+     实体&lt;div&gt; (<div>)   
+     &nbsp;空格
+     &copy;版权信息
+
+     修饰文字的属性可以被继承(子元素继承父元素的样式)
+     继承的样式优先级比自己的样式优先级低
+
+     形如div，能设置宽高并且单独占一行，这种类型的标签叫作块标签block（div,ul,ol,li,dl,dt,dd,p,pre,h1-h6,form）
+     形如span，不能设置宽高，并且和其他元素在一行显示，这种类型的标签叫作行标签inline（span,a,b,em,del,s）
+     行内既能设置宽高又能和行元素在一行显示，这种类型的标签叫作行内块标签inline-block(img,form控件)
+     表格元素table
+     相互转换：
+     display:none(无，不显示) inline block inline-block;
+
+     文档流（默认从左往右，从上往下）
+     浮动float:left right （浮动后脱离文档流）
+     浮动碰到父元素就停止，浮动会被最高的元素卡住
+     浮动能把元素转化为类似行内块元素（不是行内块元素）
+     当一行中有一个元素浮动，所有元素都会浮动（都要浮动）
+     一个border如果不设置宽度高度，他的高度是他里面内容的高度，宽度是父元素的宽度。
+     
+     当一个父元素没有设置高度，它里面的所有子元素都浮动，父元素的高度不能被子元素撑开,解决方法:
+     1.父元素加overflow:hidden;(超出部分隐藏)auto/scroll（滚动条）
+     2.清除浮动（是为了清除浮动对其它元素的影响）只能是块标签
+     .clear{
+     clear:left right both
+     }
+     <div class="clear"></div>
+
+     浮动后不能居中
+
+
+     HTML承载的内容，CSS承载的样式
+
+     盒子模型（内容部分，border，外间距，内间距）
+     margin/padding：10px 20px 30px 40px (上右下左)
+                     10px 20px 30px （上 左右 下）
+     border:20px solid blue;边框设置
+
+     行元素margin/padding值只有左右没有上下
+
+     body,ul,li,ol,p,pre,h1,h2,form{
+     margin:0;
+     padding:0;
+ }
+     a{
+     text-decoration:none;
+ }
+    
+     两个块元素的外间距会发生合并
+     margin：0 auto；水平居中
+
+     text-align 不仅能使行元素居中也能使行内块元素居中
+
+     border-top-width:1px;
+     border-top-style:dotted(点线);
+     border-top-color:
+     border-top:1px solid red 
+
+
+     background-color:blue;
+     background-image:url("");
+     background-size:
+     background-position:
+     background-repeat:no-repeat repeat-x(x轴平铺) repeat-y（y轴平铺）
+
+     margin可以是负值，padding不能是负值
+
+    定位 position：（静态定位static  相对定位relative 绝对定位absolute 固定定位fixed）
+    页面中的原始定位就是static
+    relative相对于自己原来的位置定位，脱离文档流原来的位置还在，用处不多
+
+    absolute必须写left top right bottom其中的两个，依照有定位属性的父元素去定位
+
+    fixed依照窗口定位
+
+    默认一个元素它的层级为零（z-index：0）
+    border-radius：50%
+
+    css hack
+    _margin-left:10px; ie6
+    +margin-left:;6.7
+    margin-left:#mdfm/9; 6.7.8
+
+    href="javascript:;" 取消当前页面跳转
+
+    解决透明度问题:
+    filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#4F000000,endcolorstr=#4F000000);
