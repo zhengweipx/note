@@ -10,7 +10,7 @@ mysql是一种数据库服务器，提供某些特定功能，提供数据的管
 4.数据列（指字段）
 5.数据表
 
-sql (structured)(query)(l ) 格式化的查询语句
+sql (structured)(query)(l) 格式化的查询语句
 
 insert
 delete
@@ -84,3 +84,6 @@ count avg max min sum
 
 
 affected_rows
+
+
+concat  更新的时候向某个字段追加内容

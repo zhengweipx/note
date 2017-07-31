@@ -1,5 +1,7 @@
 js内置顶层函数
 
+eval是Javascript内置函数，用于计算字符串表达式的值。例如eval("2+3") 返回的是5。
+
 1.Number();      将其他的数据类型转化为number ，只有数字类型的字符串能转化 ，""是0 ，true是1 ，flase是0 ，null是0 ，undefined不能转化      NaN是number里特殊的值 
 
 算数运算符隐式调用Number()，转化不了返回NaN

@@ -1,0 +1,17 @@
+1.双向数据绑定
+2.mvvm架构模式
+3.封装了指令
+4.按照模块化编程
+
+ng-app  指令angular控制的区域
+ng-controller
+
+amd异步加载   async  module defind
+cmd    common
+
+.factory 定义服务     .directive  定义组件
+
+1.用在大量的增删改查页面中
+
+
+#锚链接  不会向服务器发送http请求
