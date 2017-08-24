@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div class="vue">
+		<input type="text" v-model="one">
+		<input type="text" v-model="two">
+		<span>{{sum()}}</span>
+	</div>
+</body>
+</html>
+<script>
+	new Vue({
+		el:'.vue',
+		data:{
+			one:0,
+			two:0,
+		},
+		methods:{
+			sum:function(){
+				return this.one*1+this.two*1;
+			}
+		}
+		
+
+	})
+</script>

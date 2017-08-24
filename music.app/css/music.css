@@ -1,0 +1,221 @@
+@font-face {
+ 	 font-family: 'ms';  /* project id 238383 */
+  	src: url('http://at.alicdn.com/t/font_nwjglbix43lq5mi.eot');
+  	src: url('http://at.alicdn.com/t/font_nwjglbix43lq5mi.eot?#iefix') format('embedded-opentype'),
+  	url('http://at.alicdn.com/t/font_nwjglbix43lq5mi.woff') format('woff'),
+  	url('http://at.alicdn.com/t/font_nwjglbix43lq5mi.ttf') format('truetype'),
+  	url('http://at.alicdn.com/t/font_nwjglbix43lq5mi.svg#iconfont') format('svg');
+	}
+body{
+	width: 100%;
+	height: 12.94rem;
+	background-image: linear-gradient(to bottom,#333333 0%,#996666 50%,#666666 100%);
+}
+.top{
+	width: 93.6%;
+	height: 0.88rem;
+	margin: 0.4rem auto 0;
+	/*background:red;*/
+	display: flex;
+	text-align: center;
+	line-height: 0.88rem;
+}
+.top div{
+	justify-content: center;
+	flex: auto;
+	/*background: blue;*/
+	width: 20%;
+}
+.top div a{
+	color: #fff;
+	font-size: 0.38rem;
+}
+.top div:first-child a{
+	display: block;
+	text-align: left;
+	font-family: "ms";
+	font-size: 0.55rem;
+}
+.top div:last-child a{
+	display: block;
+	text-align: right;
+	font-family: "ms";
+	font-size: 0.4rem;
+}
+.top div:nth-child(3) a{
+	color: #4cf66c;
+}
+.nav{
+	width: 100%;
+	height: 5rem;
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	/*background: yellow;*/
+}
+.nav .tltle{
+	width: 93.6%;
+	height: auto;
+	display: flex;
+	margin: 0 auto;
+	text-align: center;
+	/*background-color: #4CF66C;*/
+}
+.nav .tltle div{
+	flex: auto;
+	margin: 0.4rem 0 0.2rem;
+	flex-basis:0.1rem;
+}
+.nav .tltle div a{
+	font-size: 0.34rem;
+	color: #fff;
+	
+}
+.nav .tltle div:first-child a{
+	color: #4cf66c;
+}
+.nav ul{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.nav ul li{
+	width:33.333%;
+	height: auto;
+	float: left;
+	text-align: center;
+}
+.nav ul li img{
+	width: 100%;
+}
+.nav ul li a{
+	color: #fff;
+	font-size: 0.24rem;
+}
+/*今日推荐*/
+.recommend{
+	width: 100%;
+	height: 6.04rem;
+	/*background: red;*/
+	overflow: hidden;
+}
+.recommend h5{
+	text-align: center;
+	margin: 0.6rem 0;
+}
+.recommend h5 a{
+	font-family: "ms";
+	color: #FFFFFF;
+	font-size: 0.34rem;
+	font-weight: normal;
+}
+.recommend ul li{
+	width: 100%;
+	height: 1.1rem;
+	margin: 0.2rem auto 0;
+	line-height: 0.4rem;
+	border-bottom: 1px solid #CCCCCC;
+}
+.recommend ul li:last-child{
+	border: none;
+}
+.recommend ul li a{
+	display: block;
+	width: 100%;
+	color: #FFFFFF;
+	font-size: 0.24rem;
+}
+.recommend ul li a div[class*=pic]{
+	width: 0.88rem;
+	height: 0.88rem;
+	border-radius: 50%;
+	background: blue;
+	float: left;
+	margin-right: 0.1rem;
+	margin-left: 3.2%;
+}
+.recommend ul li a h6{
+	font-size: 0.24rem;
+	font-weight: normal;
+}
+.recommend ul li a span{
+	font-size: 0.18rem;
+}
+.recommend ul li a div.pic2{
+	background-image: url(../img/ls.png);
+	background-size: 0.88rem;
+}
+.recommend ul li a div.pic1{
+	background-image: url(../img/fzw.jpg);
+	background-size: 0.88rem;
+}
+.recommend ul li a div.pic{
+	background-image: url(../img/zhd.png);
+	background-size: 0.88rem;
+}
+.recommend ul li a ul.cd{
+	width: 0.6rem;
+	height: 0.2rem;
+	/*background: red;*/
+	float: right;
+	margin-right: 3.2%;
+	margin-top: -3%;
+}
+.recommend ul li a ul.cd li{
+	width: 0.12rem;
+	height: 0.12rem;
+	border-radius: 50%;
+	background:#FFFFFF;
+	float: left;
+	margin-left: 0.05rem;
+}
+/*底部*/
+.bottom{
+	width: 100%;
+	height: 0.98rem;
+	background: #adacac;
+	line-height: 0.4rem;
+	position: relative;
+}
+.bottom .pic3{
+	width: 0.88rem;
+	height: 0.88rem;
+	border-radius: 50%;
+	background: blue;
+	float: left;
+	margin-right: 0.1rem;
+	margin-left: 3.2%;
+	margin-top: 0.05rem;
+	background-image: url(../img/fzw.jpg);
+	background-size: 0.88rem;
+}
+.bottom a{
+	display: block;
+	width: 100%;
+	color: #FFFFFF;
+	font-size: 0.24rem;
+	overflow: hidden;
+}
+.bottom a h6{
+	font-size: 0.24rem;
+	font-weight: normal;
+	margin-top: 0.05rem;
+}
+.bottom a span{
+	font-size: 0.18rem;
+}
+.bottom .play{
+	font-family: "ms";
+	position: absolute;
+	right: 15%;
+	top: 30%;
+	font-size: 0.38rem;
+	color: #FFFFFF;
+}
+.bottom .play1{
+	font-family: "ms";
+	position: absolute;
+	right: 4%;
+	top: 30%;
+	font-size: 0.38rem;
+	color: #FFFFFF;
+}

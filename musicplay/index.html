@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>音乐播放器</title>
+		<link rel="stylesheet" type="text/css" href="css/musicplay.css"/>
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_j8zlep0qvuhxgvi.css" />
+		<script src="js/musicplay.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			<div class="lyrics">
+	            <p class="title">风筝误</p>
+	            <p class="name1">刘珂矣</p>
+	            <ul>
+	
+	            </ul>
+        	</div>
+			<audio src="" id="audio"></audio>
+			<div class="list">
+				<section class="liebiao active">
+					<h1>播放列表</h1>
+					<ul>
+						<li>状态</li>
+						<li>歌名</li>
+						<li>歌手</li>
+						<li>专辑</li>
+						<li>删除</li>
+					</ul>
+					<!--<ul></ul>-->
+				</section>
+				<canvas id="canvas" width="800px" height="300px"></canvas>
+			</div>
+			<div class="play">
+				<div class="bofang">
+					<span class="iconfont icon-shangyishou"></span>
+					<span class="iconfont icon-bofang"></span>
+					<span class="iconfont icon-xiayishou"></span>
+				</div>
+				<div class="tu"></div>
+				<div class="gress">
+					<div class="name">
+						<span>风筝误---刘珂矣</span>
+					</div>
+					<div class="tiao">
+						<div class="load"></div>
+						<div class="played"></div>
+						<div class="circle"></div>
+					</div>
+					<div class="time">
+						<span>00:00</span>
+						<span>/</span>
+						<span>00:00</span>
+					</div>
+				</div>
+				<div class="yl">
+					<span class="iconfont icon-yinliang"></span>
+					<div class="tiao">
+						<div class="load"></div>
+						<div class="played"></div>
+						<div class="circle"></div>
+					</div>
+				</div>
+				<div class="menu">
+					<span class="iconfont icon-caidan"></span>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+<script>
+	    var audio = document.getElementById('audio');
+    var ctx = new AudioContext();
+    var analyser = ctx.createAnalyser();
+    var audioSrc = ctx.createMediaElementSource(audio);
+    // we have to connect the MediaElementSource with the analyser 
+    audioSrc.connect(analyser);
+    analyser.connect(ctx.destination);
+    // we could configure the analyser: e.g. analyser.fftSize (for further infos read the spec)
+    // analyser.fftSize = 64;
+    // frequencyBinCount tells you how many values you'll receive from the analyser
+    var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+    // we're ready to receive some data!
+    var canvas = document.getElementById('canvas'),
+        cwidth = canvas.width,
+        cheight = canvas.height - 2,//底座的高度
+        meterWidth = 10, //width of the meters in the spectrum
+        gap = 2, //gap between meters
+        capHeight = 2,
+        capStyle = '#fff',
+        meterNum = 800 / (10 + 2), // meter的数量
+        capYPositionArray = []; ////存储caps的垂直位置
+    ctx = canvas.getContext('2d'),
+    gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(1, 'rgba(255,255,255,0.6)');
+    gradient.addColorStop(0.5, '#31C37C');
+    gradient.addColorStop(0, 'yellow');
+    // loop
+    function renderFrame() {
+        var array = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(array);
+        var step = Math.round(array.length / meterNum); //sample limited data from the total array
+        ctx.clearRect(0, 0, cwidth, cheight);
+        for (var i = 0; i < meterNum; i++) {
+            var value = array[i * step];
+            if (capYPositionArray.length < Math.round(meterNum)) {
+                capYPositionArray.push(value);
+            };
+            ctx.fillStyle = capStyle;
+            //draw the cap, with transition effect
+            if (value < capYPositionArray[i]) {
+                ctx.fillRect(i * 12, cheight - (--capYPositionArray[i]), meterWidth, capHeight);
+            } else {
+                ctx.fillRect(i * 12, cheight - value, meterWidth, capHeight);
+                capYPositionArray[i] = value;
+            };
+            ctx.fillStyle = gradient; //set the filllStyle to gradient for a better look
+            ctx.fillRect(i * 12 /*meterWidth+gap*/ , cheight - value + capHeight, meterWidth, cheight); //the meter
+        }
+        requestAnimationFrame(renderFrame);
+    }
+    renderFrame();
+</script>

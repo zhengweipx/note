@@ -1,0 +1,47 @@
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="x5-orientation" content="portrait | landscape" />
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true" />
+<meta name="full-screen" content="yes">
+<meta name="format-detection" content="telephone=no, email=no" />
+
+
+a,button,input{
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		-webkit-appearance: none;
+}
+body{
+		-webkit-user-select:none;
+		-webkit-text-size-adjust:100%;
+		-webkit-overflow-scrolling:touch;
+}
+*{
+		font-family: "helvetica";
+		max-height:9999999px;
+}
+
+
+
+
+
+
+
+
+(function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                if(clientWidth>=750){
+                  // 这里的值 取决于设计稿的宽度
+                    docEl.style.fontSize = '100px';
+                }else{
+                    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                }
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);

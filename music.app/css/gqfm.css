@@ -1,0 +1,159 @@
+@font-face {
+  font-family: 'ms';  /* project id 238383 */
+  src: url('http://at.alicdn.com/t/font_3cno2pb3xslnxw29.eot');
+  src: url('http://at.alicdn.com/t/font_3cno2pb3xslnxw29.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_3cno2pb3xslnxw29.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_3cno2pb3xslnxw29.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_3cno2pb3xslnxw29.svg#iconfont') format('svg');
+}
+body{
+	width: 100%;
+	height: 12.94rem;
+	background-image: linear-gradient(to bottom,#333333 0%,#996666 50%,#666666 100%);
+}
+.top{
+	width: 93.6%;
+	height: 0.88rem;
+	margin: 0.4rem auto 0;
+	/*background:red;*/
+	display: flex;
+	text-align: center;
+	/*line-height: 0.88rem;*/
+}
+.top div{
+	justify-content: center;
+	flex: auto;
+	/*background: blue;*/
+	width: 33.333%;
+}
+.top div a{
+	color: #fff;
+	font-size: 0.38rem;
+}
+.top div:first-child a{
+	display: block;
+	text-align: left;
+	font-family: "ms";
+	font-size: 0.55rem;
+	line-height: 0.88rem;
+}
+.top div:last-child a{
+	display: block;
+	text-align: right;
+	font-family: "ms";
+	font-size: 0.4rem;
+	line-height: 0.88rem;
+}
+.cover{
+	width: 6.26rem;
+	height: 6.26rem;
+	border-radius: 50%;
+	overflow: hidden;
+	margin: 1.5rem auto;
+	background: rgba(255,255,255,0.4);
+}
+.cover .mediu{
+	width: 5.58rem;
+	height: 5.58rem;
+	border-radius: 50%;
+	overflow: hidden;
+	margin: 0.34rem auto;
+	background:#000000;
+}
+.cover .mediu .small{
+	width: 4rem;
+	height: 4rem;
+	border-radius: 50%;
+	margin: 0.79rem auto;
+	background-image: url(../img/fzw.jpg);
+	background-position: center center;
+	background-size: cover;
+}
+.list {
+	width: 0.5rem;
+	height: .1rem;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.list ul li{
+	width: 0.09rem;
+	height: 0.09rem;
+	border-radius: 50%;
+	background: #FFFFFF;
+	float: left;
+	margin-left: 0.06rem;
+}
+.option{
+	width: 100%;
+	height: 0.65rem;
+/*	background: red;*/
+	display: flex;
+}
+.option a{
+	float: left;
+	flex: auto;
+}
+.option a h6{
+	font-family: "ms";
+	color: #fff;
+	padding: 0.1rem 0;
+	font-size: 0.3rem;
+	margin-left: 0.8rem;
+}
+.option a:first-child h6{
+	color: red;
+}
+.progress{
+	width: 5.04rem;
+	height: 0.02rem;
+	background: #bfbfbf;
+	margin: 0.1rem auto;
+	position: relative;
+}
+.progress .bar{
+	width: 1.91rem;
+	height: 0.02rem;
+	background: #f8f1f1;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.progress .circle{
+	width: 0.22rem;
+	height: 0.22rem;
+	border-radius: 50%;
+	background: #f8f1f1;
+	position: absolute;
+	left: 1.91rem;
+	top: -0.07rem;
+}
+span.left{
+	position: absolute;
+	left: -0.8rem;
+	top: -0.07rem;
+	color: #FFFFFF;
+}
+span.right{
+	position: absolute;
+	right: -0.8rem;
+	top: -0.07rem;
+	color: #FFFFFF;
+}
+.play{
+	width: 100%;
+	height: auto;
+	display: flex;
+}
+.play a{
+	float: left;
+	flex: auto;
+}
+.play a h6{
+	font-family: "ms";
+	font-size: 0.48rem;
+	padding: 0.4rem 0;
+	color: #FFFFFF;
+}
+.play a h6:first-child{
+	margin-left: 0.5rem;
+}

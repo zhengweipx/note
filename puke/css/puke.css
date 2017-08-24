@@ -1,0 +1,51 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+body{
+	background: url(../img/bigbg.jpg);
+}
+.box{
+	width: 700px;
+	height: 650px;
+	margin: 0 auto;
+	border: 1px solid #666;
+	position: relative;
+}
+.box .right,.left{
+	width: 60px;
+	height: 30px;
+	position: absolute;
+	left: 50%;
+	margin-left: -15px;	
+	text-align: center;
+	line-height: 30px;
+	font-family: '宋体';
+	font-size: 20px;
+	color: #fff;
+}
+.right{
+	bottom: 0;
+	background: red;
+}
+.left{
+	bottom: 30px;
+	background: greenyellow;
+}
+.pai{
+	width: 90px;
+	height: 130px;
+	position: absolute;
+	top: 0;
+	left: 300px;
+	background-size: 100%;
+	opacity: 0;
+	transition: margin-top .4s linear;
+}
+.active{	
+	margin-top: -20px;
+}
+.you{
+	
+}

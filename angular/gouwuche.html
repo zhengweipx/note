@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/angular.min.js"></script>
+</head>
+<style>
+	th{
+		text-align: center;
+	}
+</style>
+<body>
+	<div ng-app="myapp">
+		<div ng-controller="ctrl">
+
+			<div class="row">
+			  	<div class="col-lg-6">
+				    <div class="input-group">
+					    <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
+					    <span class="input-group-btn">
+					        <button class="btn btn-default" type="button">Go!</button>
+					    </span>
+				    </div>
+			  </div>
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>
+						id
+					</th>
+					<th>
+						商品
+					</th>
+					<th>
+						单价
+						<span ng-class={"dropup":type=="-"} ng-click="order()">
+							<span class="caret" ></span>
+						</span>
+						
+					</th>
+					<th>
+						数量
+					</th>
+					<th>
+						总价
+					</th>
+					<th>
+						操作
+					</th>
+				</tr>
+				<tr class="text-center" ng-repeat="item in data | filter:search | orderBy:type+attr">
+					<td>
+						{{item.id}}
+					</td>
+					<td>
+						{{item.name}}
+					</td>
+					<td>
+						{{item.price | currency : '¥'}}
+					</td>
+					<td>
+						<form class="form-inline">
+							<button type="submit" class="btn btn-primary" ng-click="reduce(item.id)">-</button>
+							<div class="form-group">
+							    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+							    <div class="input-group">
+							       
+							       		<input type="text" class="form-control" id="exampleInputAmount" placeholder="{{item.num}}" ng-model="item.num">
+							      	
+							    </div>
+							</div>
+							<button type="submit" class="btn btn-primary" ng-click="add(item.id)">+</button>
+						</form>
+					</td>
+					<td>
+						{{item.price*item.num | currency : '¥'}}
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger" ng-click="del(item.id)">删除</button>
+					</td>
+				</tr>
+
+				<tr class="text-center">
+					<td colspan="6" ng-show="data.length==0">
+						没有更多商品
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						所有商品数量
+					</td>
+					<td>
+						{{getNum()}}
+					</td>
+					<td>
+						所有商品价格
+					</td>
+					<td>
+						{{getPrice() | currency : '¥'}}
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger" ng-click="empty(getNum())">清空购物车</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</div>
+	
+</body>
+</html>
+<script>
+	angular.module('myapp',[])
+		.controller('ctrl',function($scope){
+			$scope.data=[{
+				id:1,
+				name:'裤子',
+				price:150,
+				num:5
+			},{
+				id:2,
+				name:'衣服',
+				price:120,
+				num:5
+			},{
+				id:3,
+				name:'鞋子',
+				price:180,
+				num:5
+			}]
+
+			// 总数
+			$scope.getNum=function(){
+				var num=0;
+				for (var i = 0; i < $scope.data.length; i++) {
+					var nub=parseInt($scope.data[i].num)?parseInt($scope.data[i].num):0;
+					$scope.data[i].num=nub;
+					num+=nub;
+				}
+				return num;	
+			}
+			// 总价格
+			$scope.getPrice=function(){
+				var price=0;
+				for (var i = 0; i < $scope.data.length; i++) {
+					price+=$scope.data[i].price*$scope.data[i].num;
+				}
+				return price;	
+			}
+			// 删除
+			$scope.del=function(id){
+				for (var i = 0; i < $scope.data.length; i++) {
+					if (id==$scope.data[i].id) {
+						$scope.data.splice(i,1)
+					};
+				};
+			}
+			//清空购物车
+			$scope.empty=function(getNum){
+				$scope.data.splice(0,getNum)
+			}
+			// 加
+			$scope.add=function(id){
+				for (var i = 0; i < $scope.data.length; i++) {
+					if (id==$scope.data[i].id) {
+						$scope.data[i].num=$scope.data[i].num+1
+					};
+				};
+			}
+			// 减
+			$scope.reduce=function(id){
+				for (var i = 0; i < $scope.data.length; i++) {
+					if (id==$scope.data[i].id) {
+						if (!$scope.data[i].num==0) {
+							$scope.data[i].num=$scope.data[i].num-1
+						}	
+					};
+				};
+			}
+
+			// 排序
+			$scope.attr="";
+			$scope.type="";
+			$scope.order=function(){
+				$scope.attr="price";
+				if ($scope.attr=="price") {
+					if ($scope.type=="-") {
+						$scope.type=""
+					}else{
+						$scope.type="-"
+					}
+				};
+			}
+
+		})
+
+
+
+		
+</script>

@@ -1,0 +1,224 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+body{
+	/*background-image: url(../img/6.jpg);*/
+	background-size: cover;
+	background-position: center;
+}
+.box{
+	width:1000px;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+/*	background: red;*/
+}
+.box .lyrics{
+	width: 182px;
+	height: auto;
+	text-align: center;
+	color: #B9B9B9;
+	/*color: orangered;*/
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -91px;
+}
+.box .lyrics .active{
+    color:#31C37C;
+}
+.box .lyrics .title{
+	font-size: 20px;
+	color: #fff;
+}
+.box .lyrics .name1{
+	color: #fff;
+}
+.box .list{
+	width: 100%;
+	height: 90%;
+	color: #fff;
+	text-align: center;
+	position: relative;
+}
+#canvas{
+	position: absolute;
+	left: 50%;
+	margin-left: -400px;
+	bottom: 0;
+}
+.box .list .liebiao{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.6);
+}
+.box .list .liebiao.active{
+	display: none;
+}
+.box .list ul{
+	width: 80%;
+	height: 40px;
+	margin: 10px auto;
+	line-height: 40px;
+}
+.box .list ul.active{
+	background: rgba(255,255,255,.6);
+}
+.box .list ul li{
+	width: 20%;
+	height: 21px;
+	float:left;
+}
+.box .play{
+	width: 100%;
+	height: 10%;
+	background: rgba(0,0,0,.3);
+}
+.box .play .bofang{
+	width: 15%;
+	height: 100%;
+	float: left;
+	/*background: blue;*/
+	text-align: center;
+	line-height: 61px;
+}
+.box .play .bofang span{
+	font-size: 30px;
+	color: #ccc;
+}
+.box .play .bofang span:hover{
+	color: #fff;
+}
+.box .play .bofang span:nth-child(2){
+	font-size: 33px;
+}
+.box .play .tu{
+	width: 8%;
+	height: 100%;
+	float: left;
+	background-image: url(../img/fzw.jpg);
+	background-size: cover;
+	background-position: center;
+}
+.box .play .gress{
+	width: 50%;
+	height: 100%;
+	float: left;
+	/*background: yellow;*/
+	text-align: center;
+    color: #fff;
+}
+.box .play .gress .name{
+	width: 100%;
+	height: 26px;
+}
+.box .play .gress .tiao{
+	width: 96%;
+	height: 10px;
+	margin: 0 auto;
+	border-radius: 5px;
+	background: red;
+	position: relative;
+}
+.box .play .gress .load{
+	width: 0;
+	height: 10px;
+	/*background: burlywood;*/
+	background: #67686A;
+	border-radius: 5px;
+	transition: width 1s;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.box .play .gress .played{
+	width: 0;
+	height: 10px;
+	background: #31C37C;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.box .play .gress .circle{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #31BF7B;
+	position: absolute;
+	left: -10px;
+	top: -50%;
+}
+.box .play .gress .time{
+	width: 100%;
+	height: 25px;	
+}
+.box .play .yl{
+	width: 20%;
+	height: 100%;
+	float: left;
+	/*background: gold;*/
+}
+.box .play .yl span{
+	display: block;
+	width: 20%;
+	height: 30px;
+	color: #ccc;
+	font-size: 30px;
+	line-height: 30px;
+	float: left;
+	margin-top: 18px;
+}
+.box .play .yl span:hover{
+	color: #fff;
+}
+.box .play .yl .tiao{
+	width: 75%;
+	height: 10px;
+	background: #67686A;
+	border-radius:5px;
+	float: left;
+	margin-top: 27px;
+	position: relative;
+}
+.box .play .yl .played{
+	width: 100%;
+	height: 10px;
+	background: #31C37C;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.box .play .yl .circle{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #31BF7B;
+	position: absolute;
+	left: 90%;
+	top: -50%;
+}
+.box .play .menu{
+	width: 7%;
+	height: 100%;
+	float: left;
+	/*background: gray;*/
+	color: #fff;
+	line-height: 61px;
+	text-align: center;
+}
+.box .play .menu span{
+	font-size: 30px;
+	color: #ccc;
+}
+.box .play .menu span:hover{
+	color: #fff;
+}

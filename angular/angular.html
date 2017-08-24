@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.min.js"></script>
+	<script src="js/filters.js"></script>
+</head>
+<body>
+	<div ng-app="myapp">
+		<div ng-controller="ctrl">
+			<!-- {{['1','2',3] | maxOrmin}} -->
+			<input type="text" ng-model="one">
+			<input type="text" ng-model="two">
+			<span>{{one*1+two*1}}</span>
+		</div>		
+	</div>
+</body>
+</html>
+<script>
+	angular.module('myapp',[])
+		.controller('ctrl',function($scope){   //mvvm 双向绑定   $watch
+			$scope.$watch('one',function(news,olds){    //检测数值变化
+				console.log(news);
+				console.log(olds);
+			})
+			$scope.one=0;
+			$scope.two=0;
+		})
+
+	
+</script>
