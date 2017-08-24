@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js"></script>
+	</head>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		table{
+			width:600px;
+			height:auto;
+			margin:0 auto;
+			border-collapse: collapse;
+		}
+		tr{
+			width:100%;
+			height:40px;
+		}
+		th,td{
+			width:16.6666%;
+			height:100%;
+			text-align: center;
+			border:1px solid #000;
+		}
+	</style>
+	<body>
+	</body>
+</html>
+<script>
+	$.ajax({
+		type:"get",
+		url:'https://free-api.heweather.com/v5/weather?city='+localStorage.city+'&key=f07bd44414c0479280d9a25781b45747',
+		async:true,
+		success:function($result){
+			console.log($result)
+		}
+	}).done(function(v5){
+		console.log(v5['HeWeather5'][0].aqi.city.no2)
+		let obj=v5['HeWeather5'][0];
+		$('<table>').html(
+			`<tr>
+				<th>城市</th>
+				<th>天气</th>
+				<th>温度</th>
+				<th>降水量</th>
+				<th>风向</th>
+				<th>能见度</th>
+			</tr>
+			<tr>
+				<td>${obj.basic.city}</td>
+				<td>${obj.now.cond.txt}</td>
+				<td>${obj.now.tmp}℃</td>
+				<td>${obj.now.pcpn}</td>
+				<td>${obj.now.wind.dir}</td>
+				<td>${obj.now.vis}</td>
+			</tr>`
+		).appendTo(document.body);
+	})
+</script>

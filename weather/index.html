@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery.js"></script>
+	</head>
+	<style>
+		li{
+			margin: 10px
+		}
+	</style>
+	<body>
+		<input type="text" placeholder="请输入中文名或拼音"/>
+		<ul></ul>
+	</body>
+</html>
+<script>
+//	$.ajax({
+//		type:"get",
+//		url:"weather.php",
+//		async:true,
+//		success:function($result){
+//			console.log($result)
+//		}
+//	});
+//	图片加载
+	$(document).ajaxStart(function(){
+		$('<img>').attr('src','img/2.jpg').appendTo(document.body)
+	});
+	$(document).ajaxSuccess(function(){
+		$('img').remove()
+	});
+//	通过HTTP GET 请求载入JSON数据
+	$.getJSON('weather.php').done(function(val){
+		console.log(val)
+		val.forEach(function(value,index){
+			$('<li>').html(value.cityZh).attr('city',value.cityZh).appendTo('ul')
+		})
+	//	重构
+		$('input').keyup(function(){
+			let nowarr=[];
+			let value=$(this).val();
+			nowarr=val.filter(function(obj){
+				return obj.cityZh.includes(value)||obj.cityEn.includes(value)
+			})
+			$('ul').empty();
+			nowarr.forEach(function(value,index){
+				$('<li>').html(value.cityZh).attr('city',value.cityZh).appendTo('ul')
+			})
+		})
+//		点击
+		$('ul').on('click','li',function(){
+			localStorage.city=$(this).attr('city');
+			location.href='more.html';
+		})
+		
+	})
+
+</script>
