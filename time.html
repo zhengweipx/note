@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>北京时间</title>
+</head>
+<style>
+    div{
+        width: 500px;
+        height: 500px;
+        margin: auto;
+        text-align: center;
+        line-height: 500px;
+    }
+</style>
+<body>
+	<div class="time"></div>
+</body>
+</html>
+<script>
+	setInterval(function () {
+        var time = new Date();
+        //月
+        var month1 = time.getMonth()+1;
+        var month;
+        if (month1.toString().length>1){
+            month = month1;
+        }else {
+            month = '0' + month1;
+        }
+        //日
+        var date;
+        if (time.getDate().toString().length>1){
+            date = time.getDate();
+        }else {
+            date = '0' + time.getDate();
+        }
+        //时
+        var hours;
+        if (time.getHours().toString().length>1){
+            hours = time.getHours();
+        }else {
+            hours = '0' + time.getHours();
+        }
+        //分
+        var minutes;
+        if (time.getMinutes().toString().length>1){
+            minutes = time.getMinutes();
+        }else {
+            minutes = '0' + time.getMinutes();
+        }
+        //秒
+        var second;
+        if (time.getSeconds().toString().length>1){
+            second = time.getSeconds();
+        }else {
+            second = '0' + time.getSeconds();
+        }
+
+        var current_time=time.getFullYear()+'/'+month+'/'+date+' '+hours+':'+minutes+':'+second;
+        document.querySelector('.time').innerHTML=current_time;
+    },1000)
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title></title>
+<script src="assets/jquery.min.js"></script>
+
+</head>
+<style type="text/css">
+	.mima{
+		position: relative;
+	}
+	.mima > img {
+		position: absolute;
+		left: 180px;
+		top: -25px;
+		display: none;
+	}
+	.first{
+		display: block!important;
+	}
+
+</style>
+<body>
+<form >
+    <input type="password" name="password" id="password" />
+  
+    <div class="mima" >
+        <img id="bukejian" src="6.png" alt="" class="first">
+        <img id="kejian" src="5.png" alt="">
+    </div>
+</form>
+</body>
+</html>
+<script>
+	$('#bukejian').click(function(){
+	
+		$(this).removeClass('first');
+		$('#kejian').addClass('first');
+		$('#password')[0].type='text';
+	
+	})
+
+	$('#kejian').click(function(){
+	
+		$(this).removeClass('first');
+		$('#bukejian').addClass('first');
+		$('#password')[0].type='password';
+	
+	})
+
+
+</script>
+

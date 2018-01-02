@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/rem.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    .attention{
+        width:1.6rem;
+        height:.6rem;
+        float: right;
+        margin-top: .6rem;
+        margin-right: .24rem;
+    }
+    .attend_to {
+        width: 1.6rem;
+        height: .6rem;
+        background: #FFE400;
+        border-radius: .5rem;
+        border: .02rem solid #E5E5E5;
+        font-style: normal;
+        font-size: .24rem;
+        text-align: center;
+        line-height: .55rem;
+    }
+    .attent_already{
+        width: 1.6rem;
+        height: .6rem;
+        float: right;
+        background: #FFFFFF;
+        border-radius: .5rem;
+        border: .02rem solid #E5E5E5;
+        font-style: normal;
+        font-size: .24rem;
+        text-align: center;
+        line-height: .55rem;
+       /* margin-top: .6rem;
+        margin-right: .24rem;*/
+    }
+    .box{
+    	width: 200px;
+    	height: 200px;
+    	overflow: hidden;
+    	position: relative;
+    }
+    .a{
+    	width: auto;
+    	height: auto;
+    	position: absolute;
+    	left: 0;
+    	top: 0;
+    	bottom: 0;
+    	right: 0;
+    	margin: auto;
+    	display: none;
+    }
+    .first{
+    	display: block;
+    }
+</style>
+<body>
+<div class="attention"><div class="attend_to at">+关注</div></div>
+
+ <img id ="target" src="1.png" alt="">
+
+<div class="box">
+	<img id ="target1" src="3.png" alt="" class='a first'>
+	<img id ="target2" src="4.png" alt="" class='a'>
+</div>
+
+
+</body>
+</html>
+<script>
+    function attention(){
+        $(".attention").on("click",function(){
+            if($(".attention>.attend_to").length>0){
+                // alert("关注成功");
+                $(".attention>.at").removeClass("attend_to");
+                $(".attention>.at").addClass("attent_already");
+                $(".attention>.at").html('取消关注')
+            }else if($(".attention>.at").hasClass("attent_already")){
+                // alert("取消成功")
+                $(".attention>.at").removeClass("attent_already");
+                $(".attention>.at").addClass("attend_to");
+                $(".attention>.at").html('+关注')
+            }
+        });
+    }
+
+    attention();
+
+
+    var current = 0;   
+   
+     setInterval(function(){
+     	current = (current+10)%360;
+       	document.querySelector('#target').style.transform = 'rotate('+current+'deg)';
+    },50)
+
+    $('#target1').click(function(){
+    	$(this).removeClass('first');
+    	$('#target2').addClass('first');
+    })
+
+     $('#target2').click(function(){
+    	$(this).removeClass('first');
+    	$('#target1').addClass('first');
+    })
+    
+</script>

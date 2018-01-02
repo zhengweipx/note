@@ -113,7 +113,7 @@ localStorage['bb']=123;
 localStorage.setItem('name','lisi');
 console.log(localStorage.getItem('name'))/console.log(localStorage.name)
 
-localStorage.removeItem('aa');
+localStorage.removeItem('aa');  清楚aa
 localStorage.clear();   将所有全清空
 
 

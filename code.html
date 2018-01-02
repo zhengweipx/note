@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    div{
+        width: 500px;
+        height: 500px;
+        margin: auto;
+        vertical-align: middle;
+    }
+</style>
+<body>
+<div>
+    <img src="code.php" alt="" id="img" onclick="this.src='code.php?r='+Math.random()">
+    <a href="javascript:;" onclick="document.getElementById('img').src='code.php?r='+Math.random()">换一个?</a>
+</div>
+</body>
+</html>

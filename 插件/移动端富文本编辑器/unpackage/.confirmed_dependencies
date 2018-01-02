@@ -1,0 +1,15 @@
+{
+	"index.html": {
+		"resources": [
+			"assets/pic/sx.png",
+			"assets/pic/cz.png",
+			"assets/jquery.min.js",
+			"assets/trumbowyg.js",
+			"assets/design/css/trumbowyg.css",
+			"assets/pic/fd.png",
+			"assets/plugins/base64/trumbowyg.base64.js",
+			"assets/design/images/icons-sa75ce98b2b.png",
+			"assets/pic/sc.png"
+		]
+	}
+}

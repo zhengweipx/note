@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="assets/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        border-radius: 50%;
+        display: none;
+    }
+
+    .box img {
+        display: none;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    
+    }
+    .img{
+        display:block!important;
+    }
+</style>
+<body>
+<div class="compile">编辑</div>
+<div class="box"><img  src="2.png" alt=""></div>
+<div class="box"><img  src="2.png" alt=""></div>
+<div class="box"><img  src="2.png" alt=""></div>
+<div class="box"><img  src="2.png" alt=""></div>
+<div class="box"><img  src="2.png" alt=""></div>
+<div class="box"><img  src="2.png" alt=""></div>
+</body>
+</html>
+<script>
+    $(function () {
+        $(".compile").on("click", function () {
+            $(".box").show();
+        })
+
+        $(".box").on("click", function () {
+        
+            $(".box>img").eq($(this).index()-1).addClass('img');
+            $("img").on("click", function (e) {
+                e.stopPropagation();
+                $(this).removeClass('img');
+                console.log($('.img '))
+                if ($('.img ').length==0) {
+                     $(".compile").html("编辑")
+                }
+            
+            })
+            $(".compile").html("<em class='delete'>delete</em>")
+            $(".delete").on("click", function () {
+                alert("delete")
+            })
+        })
+
+
+    })
+</script>

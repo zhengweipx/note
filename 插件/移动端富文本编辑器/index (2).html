@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/rem.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    .attention{
+        width:1.6rem;
+        height:.6rem;
+        float: right;
+        margin-top: .6rem;
+        margin-right: .24rem;
+    }
+    .attend_to {
+        width: 1.6rem;
+        height: .6rem;
+        background: #FFE400;
+        border-radius: .5rem;
+        border: .02rem solid #E5E5E5;
+        font-style: normal;
+        font-size: .24rem;
+        text-align: center;
+        line-height: .55rem;
+    }
+    .attent_already{
+        width: 1.6rem;
+        height: .6rem;
+        float: right;
+        background: #FFFFFF;
+        border-radius: .5rem;
+        border: .02rem solid #E5E5E5;
+        font-style: normal;
+        font-size: .24rem;
+        text-align: center;
+        line-height: .55rem;
+        margin-top: .6rem;
+        margin-right: .24rem;
+    }
+</style>
+<body>
+<div class="attention"><div class="attend_to">+关注</div></div>
+</body>
+</html>
+<script>
+    function attention(){
+        $(".attention").on("click",function(){
+            console.log($(".attention").children())
+            if($(".attention>.attend_to").length>0){
+                alert("关注成功");
+                $(".attention").empty()
+                $("<div class='attent_already'>取消关注</div>").appendTo(".attention");
+            }else{
+                alert("取消成功")
+                $("attention").empty();
+                $(".attention").empty()
+                $("<div class='attend_to'>+关注</div>").appendTo(".attention");
+
+            }
+        });
+    }
+
+    attention();
+</script>

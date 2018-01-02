@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="assets/jquery.min.js"></script>
+	</head>
+	<style type="text/css">
+		.content li{
+			display: none;
+		}
+		.active{
+			display: block !important;
+		}
+	</style>
+	<body>
+		<ul class="tab">
+			<li>
+				<a href="#">sss</a>
+			</li>
+			<li>
+				<a href="#">sss</a>
+			</li>
+			<li>
+				<a href="#">sss</a>
+			</li>
+			<li>
+				<a href="#">sss</a>
+			</li>
+		</ul>
+		
+		<ul class="content">
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+	</body>
+</html>
+<script>
+	$('.tab li').click(function(){
+		$('.content li').eq($(this).index()).addClass('active').siblings().removeClass('active');
+	})
+</script>
