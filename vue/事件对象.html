@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script src="vue-resource.js"></script>
+</head>
+<style>
+	.red{
+		color: red;
+	}
+	.blue{
+		background: blue;
+	}
+	.gray{
+		background: #ccc;
+	}
+</style>
+<body>
+	<div id="box">
+		<p :style="[c,background]">123</p>
+		<p :class="[red,b]">123</p>
+		<p :class="{red:true,blue:false}">123</p>
+		<img :src="url" alt="" :width="width" :title="t">
+		<br>
+		<input type="text" @keydown.up="key($event)" v-model="msg">
+		<br>
+		{{msg|uppercase}}
+		<br>
+		<span v-once>{{msg}}</span>
+		<br>
+		<span v-html="msg"></span>
+		<div @click="show2()">
+			<input type="button" value="按钮" @contextmenu.prevent="show($event)">
+		</div>
+		
+		<p>360搜索</p>
+		<input type="text" @keyup="get($event)" v-model="ls" @keydown.down.prevent="changeDown()" @keydown.up.prevent="changeUp()">
+		<ul>
+			<li v-for="(item,index) in myData" :class="{gray:index==now}">{{item}}</li>
+		</ul>
+
+		<input type="button" value="http" @click="get()">
+	</div>
+</body>
+</html>
+<script>
+	new Vue({
+		el:"#box",
+		data:{
+			url:"Test.webp",
+			width:"200px",
+			t:"地球",
+			red:'red',
+			b:'blue',
+			c:{
+				color:'red'
+			},
+			background:{
+				backgroundColor:'blue'
+			},
+			msg:'abc',
+			myData:[],
+			ls:'a',
+			now:-1
+		},
+		methods:{
+			show:function (event) {
+				alert(1)
+				// event.preventDefault();
+				// event.cancelBubble=true;  //阻止冒泡
+			},
+			show2:function (){
+				alert(2)
+			},
+			key:function (event){
+				alert(1)
+				console.log(event)
+			},
+			get:function (event){
+				if (event.keyCode == 38 || event.keyCode == 40) return;
+				this.now=-1;
+				if (event.keyCode == 13) window.open('https://www.so.com/s?q='+this.ls);
+				this.$http.jsonp('http://sug.so.360.cn/suggest?callback=suggest_so',{
+					params:{
+						word:this.ls
+					}
+				}).then(function(res){
+					this.myData=res.data.s;
+				},function(res){
+					console.log(res)
+				})
+			},
+			changeDown:function(){
+				this.now++;
+				if (this.now >= this.myData.length) {
+					this.now=0;
+				}
+				this.ls=this.myData[this.now];
+			},
+			changeUp:function(){
+				this.now--;
+				if (this.now < 0) {
+					this.now=this.myData.length-1;
+				}
+				this.ls=this.myData[this.now];
+			}
+		},
+		filters:{
+            uppercase:function(value){
+                if(!value) return '';
+                value = value.toString();
+                return value.toUpperCase();
+            },
+            addString:function(value){
+                if(!value) return "";
+                value=value.toString()+" filters test";
+                return value;
+            }
+        }
+
+	})
+</script>

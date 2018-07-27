@@ -31,7 +31,7 @@
 		<input type="text" @keydown.13="add()" v-model="text"><br>
 		<ul v-if="state=='all'">
 	         <li v-for="item in all">
-	             <span class="opt" @click="change(item.id,item.status)" :class={red:item.status==2}></span>
+	             <span class="opt" @click="change(item.id,item.status)" :class={red:item.status==1}></span>
 	             {{item.con}}
 	             <span @click="del(item.id,item.status)">删除</span>
 	         </li>
